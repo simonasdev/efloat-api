@@ -1,0 +1,35 @@
+.page-header
+  = link_to new_race_path, class: 'btn btn-primary' do 
+    span.glyphicon.glyphicon-plus
+    |  New Race
+  h1
+    | Listing races
+
+.table-responsive
+  table.table.table-striped.table-bordered.table-hover
+    thead
+      tr
+        th
+          | Title
+        th
+          | Start time
+        th
+          | End time
+        th
+        th
+        th
+    tbody
+      - @races.each do | race |
+        tr
+          td
+            = race.title
+          td
+            = race.start_time
+          td
+            = race.end_time
+          td
+            = link_to 'Show', race
+          td
+            = link_to 'Edit', edit_race_path(race) 
+          td
+            = link_to 'Destroy', race, method: :delete, data: { confirm: 'Are you sure?' } 

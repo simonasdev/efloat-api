@@ -1,0 +1,7 @@
+{
+  "name": "efloat-api",
+  "private": true,
+  "dependencies": {
+    "leaflet-geometryutil": "^0.8.1"
+  }
+}

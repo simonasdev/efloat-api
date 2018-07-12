@@ -1,0 +1,8 @@
+- content_for :container_class, 'watch-container'
+
+.map-container
+  iframe src=Rails.application.config.react_host
+  .device-actions.hidden
+
+javascript:
+  window.allowedOrigin = '#{Rails.application.config.react_host}';

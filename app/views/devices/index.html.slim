@@ -1,0 +1,37 @@
+.page-header
+  = link_to new_device_path, class: 'btn btn-primary' do
+    span.glyphicon.glyphicon-plus
+    |  New Device
+  h1
+    | Listing devices
+
+.table-responsive
+  table.table.table-striped.table-bordered.table-hover
+    thead
+      tr
+        th Number
+        th Name
+        th Position
+        th Kind
+        th State
+        th
+        th
+        th
+    tbody
+      - @devices.each do | device |
+        tr
+          td= device.number
+          td= device.name
+          td= device.position
+          td= device.kind
+          td= device.state
+          td= link_to 'Show', device
+          td= link_to 'Edit', edit_device_path(device)
+          td
+            - if device.enabled?
+              = link_to 'Disable', device_path(device, { device: { state: :disabled } }), method: :patch, class: 'btn btn-danger'
+            - elsif device.disabled?
+              = link_to 'Enable', device_path(device, { device: { state: :enabled } }), method: :patch, class: 'btn btn-success'
+
+h2 Connected devices
+#connected-devices

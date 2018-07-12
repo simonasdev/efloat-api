@@ -1,0 +1,53 @@
+#map {
+  height: 600px;
+}
+
+.absolute-tooltip {
+  position: absolute;
+}
+
+.watch-container {
+  height: calc(100vh - #{$navbar-height});
+  display: flex;
+  flex-direction: column;
+
+  .map-container {
+    flex: 1;
+    display: flex;
+
+    iframe {
+      flex: 1;
+      border: none;
+      border-right: 1px solid #eee;
+    }
+    .device-actions {
+      flex-basis: 400px;
+      padding-left: 15px;
+      height: 100%;
+      overflow: auto;
+      overflow-x: hidden;
+
+      dl {
+        margin-bottom: 0;
+
+        dd {
+          margin-left: 0;
+          margin-bottom: 10px;
+
+          &:last-child {
+            margin-bottom: 0;
+          }
+        }
+      }
+    }
+
+    @media (max-width: $screen-md-min) {
+      flex-direction: column;
+
+      iframe {
+        flex-basis: 600px;
+      }
+    }
+  }
+
+}

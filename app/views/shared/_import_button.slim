@@ -1,0 +1,6 @@
+= form_tag path, style: 'display:inline;', multipart: true do
+  = hidden_field_tag :content_type, format
+  label class="btn btn-primary btn-file"
+    i class="glyphicon glyphicon-upload"
+    = " #{text}"
+    = file_field_tag :file, accept: ".#{ format }"

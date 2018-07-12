@@ -1,0 +1,2 @@
+pre
+  = devices.map { |device| %Q(#{device.number} - #{device.index}, #{$redis.get("data_lines:#{device.id}")}) }.join("\n")

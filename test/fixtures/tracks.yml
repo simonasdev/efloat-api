@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  race: one
+  speed_limit: 1.5
+
+two:
+  race: two
+  speed_limit: 1.5

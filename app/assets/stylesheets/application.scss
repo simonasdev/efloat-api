@@ -1,0 +1,72 @@
+@import "bootstrap-generators";
+@import "bootstrap-datetimepicker";
+@import "leaflet";
+
+@import "forms";
+@import "map";
+
+body {
+  padding-top: $navbar-height;
+}
+
+.navbar {
+  margin-bottom: 0;
+}
+
+.alert {
+  margin: 20px 0;
+}
+
+.page-header {
+  a.btn, form {
+    float: right;
+  }
+
+  a.btn + a.btn, a.btn + form, form + a.btn {
+    margin-right: 8px;
+  }
+}
+
+input[type="radio"], input[type="checkbox"] {
+  width: initial;
+  height: initial;
+  margin-top: 7px;
+}
+
+.actions {
+  margin-top: 10px;
+}
+
+.mb-10 {
+  margin-bottom: 10px;
+}
+
+.mr-10 {
+  margin-right: 10px;
+}
+
+.ml-10 {
+  margin-left: 10px;
+}
+
+.mt-10 {
+  margin-top: 10px;
+}
+
+.links {
+  border-bottom: 1px solid #eee;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  a + a {
+    margin-left: 8px;
+  }
+
+  input {
+    margin-bottom: 10px;
+  }
+}

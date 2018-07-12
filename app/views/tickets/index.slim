@@ -1,0 +1,32 @@
+.page-header
+  = import_button 'Import tickets', import_tickets_path, :xml
+  h1
+    | Listing tickets
+
+.row
+  = form_tag pass_tickets_path, remote: true, method: :put, class: 'toggle-feedback' do
+    .col-md-4
+      .input-group#ticket-barcode
+        = text_field_tag :barcode, nil, placeholder: 'Barcode', class: 'form-control', autofocus: true
+        span.input-group-addon.feedback
+          span#success.glyphicon.glyphicon-check.hidden
+          span#loading.glyphicon.glyphicon-refresh.spin.hidden
+          span#error.glyphicon.glyphicon-remove.hidden
+hr
+.table-responsive
+  table.table.table-striped.table-bordered.table-hover
+    thead
+      tr
+        th ticketID
+        th barcode
+        th Passed
+        th CanEnter
+    tbody
+      - @tickets.each do |ticket|
+        tr
+          td= ticket.identifier
+          td= ticket.barcode
+          td= ticket.passed
+          td= ticket.can_enter
+
+  = paginate @tickets

@@ -1,0 +1,46 @@
+.page-header
+  = link_to races_path, class: 'btn btn-default' do
+    span.glyphicon.glyphicon-list-alt
+    |  Back
+  = link_to edit_race_path(@race), class: 'btn btn-primary' do
+    span.glyphicon.glyphicon-pencil
+    |  Edit
+  = import_button 'Import track', import_tracks_race_path(@race)
+  = link_to watch_race_path(@race), class: 'btn btn-primary' do
+    span.glyphicon.glyphicon-eye-open
+    |  Watch race
+
+  h1
+    | Show race
+dl.dl-horizontal
+  dt
+    | Title:
+  dd
+    = @race.title
+  dt
+    | Start time:
+  dd
+    = @race.start_time
+  dt
+    | End time:
+  dd
+    = @race.end_time
+  / hr
+  / dt
+  / dd
+  /   .row
+  /     .col-md-3
+  /       = number_field_tag :speed, nil, placeholder: 'Speed exceeded', class: 'form-control'
+  /     .col-md-9
+  /       = link_to '#', class: 'btn btn-success', id: 'speed-report' do
+  /         span.glyphicon.glyphicon-dashboard
+  /         |  Speed report
+
+.row
+  .col-xs-12
+    - if @race.tracks.any?
+      #map data-tracks=(@race.tracks.map { |track| track.slice(:route, :id, :name, :length_in_km, :kind, :speed_limit, :start_time, :end_time) }.to_json)
+      / #map data-tracks=([Track.first.slice(:id, :name, :length_in_km, :kind, :speed_limit, :start_time, :end_time).merge(route: Point.all.pluck(:x, :y))].to_json)
+      / #map data-tracks=([Track.first.slice(:route, :id, :name, :length_in_km, :kind, :speed_limit, :start_time, :end_time)].to_json)
+      - @race.tracks.each do |track|
+        i.absolute-tooltip data-toggle="tooltip" data-placement="right" data-trigger="manual" data-title="#{track.name}, #{track.kind}<br>Length: #{track.length_in_km}<br>Speed limit: #{track.speed_limit}km/h" data-id=track.id data-container='#map' data-html="true"

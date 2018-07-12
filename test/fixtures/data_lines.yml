@@ -1,0 +1,29 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  device: one
+  data: MyText
+  timestamp: 2018-06-02 18:53:45
+  battery_voltage: 1.5
+  latitude: 9.99
+  longitude: 9.99
+  cardinal_direction: MyText
+  altitude: 1.5
+  orientation: 1
+  sos_count: 1
+  ok_count: 1
+  check: false
+
+two:
+  device: two
+  data: MyText
+  timestamp: 2018-06-02 18:53:45
+  battery_voltage: 1.5
+  latitude: 9.99
+  longitude: 9.99
+  cardinal_direction: MyText
+  altitude: 1.5
+  orientation: 1
+  sos_count: 1
+  ok_count: 1
+  check: false

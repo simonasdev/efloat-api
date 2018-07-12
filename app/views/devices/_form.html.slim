@@ -1,0 +1,43 @@
+= form_for(@device, html: { class: "form-horizontal", role: "form" }) do |f|
+  - if @device.errors.any?
+    .alert.alert-danger.alert-dismissable role="alert"
+      button.close type="button" data-dismiss="alert"
+        span aria-hidden="true"
+          | &times;
+        span.sr-only
+          | Close
+      h4= "#{pluralize(@device.errors.count,"error")} prohibited this device from being saved:"
+      ul
+        - @device.errors.full_messages.each do |msg|
+          li= msg
+  .form-group
+    = f.label :number, class: "col-sm-2 control-label"
+    .col-sm-10
+      = f.telephone_field :number, class: "form-control"
+  .form-group
+    = f.label :name, class: "col-sm-2 control-label"
+    .col-sm-10
+      = f.text_field :name, class: "form-control"
+  .form-group
+    = f.label :kind, class: "col-sm-2 control-label"
+    .col-sm-10
+      = f.select :kind, options_for_select(Device.kinds.keys, @device.kind), class: "form-control"
+  .form-group
+    = f.label :car, class: "col-sm-2 control-label"
+    .col-sm-10
+      = f.text_field :car, class: "form-control"
+  .form-group
+    = f.label :country, class: "col-sm-2 control-label"
+    .col-sm-10
+      = f.text_field :country, class: "form-control"
+  .form-group
+    = f.label :comment, class: "col-sm-2 control-label"
+    .col-sm-10
+      = f.text_field :comment, class: "form-control"
+  .form-group
+    = f.label :position, class: "col-sm-2 control-label"
+    .col-sm-10
+      = f.text_field :position, class: "form-control"
+  .form-group
+    .col-sm-offset-2.col-sm-10
+      = f.submit class: "btn btn-primary"

@@ -1,0 +1,35 @@
+= form_for(@race, html: { class: "form-horizontal", role: "form" }) do |f|
+  - if @race.errors.any?
+    .alert.alert-danger.alert-dismissable role="alert"
+      button.close type="button" data-dismiss="alert"
+        span aria-hidden="true"
+          | &times;
+        span.sr-only
+          | Close
+      h4= "#{pluralize(@race.errors.count,"error")} prohibited this race from being saved:"
+      ul
+        - @race.errors.full_messages.each do |msg|
+          li= msg
+  .form-group
+    = f.label :title, class: "col-sm-2 control-label"
+    .col-sm-10
+      = f.text_field :title, class: "form-control"
+  .form-group
+    = f.label :start_time, class: "col-sm-2 control-label"
+    .col-sm-10
+      label
+        .input-group
+          span class="input-group-addon"
+            span class="glyphicon glyphicon-calendar"
+          = f.text_field :start_time, class: "form-control datetimepicker"
+  .form-group
+    = f.label :end_time, class: "col-sm-2 control-label"
+    .col-sm-10
+      label
+        .input-group
+          span class="input-group-addon"
+            span class="glyphicon glyphicon-calendar"
+          = f.text_field :end_time, class: "form-control datetimepicker"
+  .form-group
+    .col-sm-offset-2.col-sm-10
+      = f.submit class: "btn btn-primary"

@@ -1,0 +1,34 @@
+.page-header
+  = link_to devices_path, class: 'btn btn-default' do
+    span.glyphicon.glyphicon-list-alt
+    |  Back
+  = link_to edit_device_path(@device), class: 'btn btn-primary' do
+    span.glyphicon.glyphicon-pencil
+    |  Edit
+  h1
+    | Show device
+dl.dl-horizontal
+  dt
+    | Number:
+  dd
+    = @device.number
+  dt
+    | Name:
+  dd
+    = @device.name
+  dt
+    | Index:
+  dd
+    = @device.index
+  dt
+    | Kind:
+  dd
+    = @device.kind
+  dt Current data:
+  dd
+    pre= JSON.pretty_generate(@device.current_data_line&.attributes&.except('id', 'created_at', 'updated_at', 'device_id'))
+  dt Crew data:
+  dd
+    pre= JSON.pretty_generate(@device.crew_data)
+  dt Commands:
+  dd= render 'commands', device: @device

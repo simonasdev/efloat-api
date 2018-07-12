@@ -1,0 +1,36 @@
+- remote ||= false
+.links
+  = link_to command_device_path(device, value: 'calibrate'), class: 'btn btn-primary', method: :post, remote: remote do
+    span.glyphicon.glyphicon-wrench
+    |  Calibrate
+
+.links
+  - default_period = 1000
+  .row
+    .col-md-6.col-sm-8
+      = number_field_tag 'period', nil, placeholder: "Period, default: #{ default_period }", class: 'form-control', min: 100, max: 3600000
+  = link_to command_device_path(device, value: "start,#{ default_period }"), class: 'btn btn-success', method: :post, remote: remote do
+    span.glyphicon.glyphicon-cloud-upload
+    |  Start
+  / = link_to command_device_path(device, value: 'stop'), class: 'btn btn-danger', method: :post, remote: remote do
+  /   span.glyphicon.glyphicon-stop
+  /   |  Stop
+
+.links
+  = link_to command_device_path(device, value: 'check,on'), class: 'btn btn-success', method: :post, remote: remote do
+    span.glyphicon.glyphicon-ok-sign
+    |  Check on
+  = link_to command_device_path(device, value: 'check,off'), class: 'btn btn-danger', method: :post, remote: remote do
+    span.glyphicon.glyphicon-ok-circle
+    |  Check off
+
+.links
+  = link_to command_device_path(device, value: 'zero,ok'), class: 'btn btn-info', method: :post, remote: remote do
+    span.glyphicon.glyphicon-repeat
+    |  Zero OK
+  = link_to command_device_path(device, value: 'zero,sos'), class: 'btn btn-info', method: :post, remote: remote do
+    span.glyphicon.glyphicon-repeat
+    |  Zero SOS
+  = link_to command_device_path(device, value: 'zero,up'), class: 'btn btn-info', method: :post, remote: remote do
+    span.glyphicon.glyphicon-repeat
+    |  Zero UP
