@@ -15,7 +15,7 @@ class TrackIdentity::ProcessCoordinates
 
   def point_array
     coord_array.map do |lat, lng|
-      TrackIdentity::CoordToMeters.go(lng, lat)
+      TrackIdentity::CoordToMeters.go(lat, lng)
     end
   end
 end

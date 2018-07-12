@@ -3,10 +3,22 @@
 module TrackIdentity::CoordToMeters
   module_function
 
-  def go(lng, lat)
+  def go(lat, lng)
     x = lng * TrackIdentity::MAGIC * Math.cos(lat)
     y = lat * TrackIdentity::MAGIC
 
-    [x, y].map(&:to_i)
+    [x, y].map do |float|
+      (float / TrackIdentity::SQUARE_SIZE).to_i
+    end
+  end
+
+  def reverse(x, y)
+    x *= TrackIdentity::SQUARE_SIZE
+    y *= TrackIdentity::SQUARE_SIZE
+
+    lat = y / TrackIdentity::MAGIC
+    lng = x / TrackIdentity::MAGIC / Math.cos(lat)
+
+    [lat, lng].map(&:to_f)
   end
 end
