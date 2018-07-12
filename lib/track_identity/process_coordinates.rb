@@ -1,5 +1,3 @@
-require 'matrix'
-
 class TrackIdentity::ProcessCoordinates
   attr_reader :coord_array
 

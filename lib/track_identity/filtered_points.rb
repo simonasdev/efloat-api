@@ -15,33 +15,26 @@ class TrackIdentity::FilteredPoints
   private
 
   def filtered_points
-    assigned_points.select do |point|
-      point[:distance] <= TrackIdentity::MAX_DIST_FROM_TRACK / TrackIdentity::SQUARE_SIZE
-    end
-  end
+    total = all_points.size
 
-  def assigned_points
-    all_points.map.with_index do |point, index|
-      p "#{index} done" if index % 100 == 0
-      line, distance = closest_line_to([point[:x], point[:y]])
-
-      point[:line] = line
-      point[:distance] = distance
-
-      point
+    all_points.select.with_index do |point, index|
+      p "#{total} | #{index} done" if index % 100 == 0
+      # point_distance_to_line_segment([point[:x], point[:y]]) <= TrackIdentity::MAX_DIST_FROM_TRACK / TrackIdentity::SQUARE_SIZE
+      true
     end
   end
 
   def all_points
-    TrackIdentity::PointMatrix.new(point_array).run
+    @all_points ||= TrackIdentity::PointMatrix.new(point_array).run
   end
 
-  def closest_line_to(point)
-    k = TrackIdentity::PointDistanceToSegment.new([], nil)
-    lines_with_distances = lines.map do |line|
-      [line, k.dist_to_segment(*line, point)]
+  def point_distance_to_line_segment(point)
+    calculator = TrackIdentity::PointDistanceToSegment.new([], nil)
+
+    distances = lines.map do |line|
+      calculator.dist_to_segment(*line, point)
     end
 
-    lines_with_distances.min_by(&:last)
+    distances.min
   end
 end

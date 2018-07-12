@@ -12,7 +12,7 @@ class TrackIdentity::PointDistanceToSegment
   end
 
   def distance_squared(lpa, lpb)
-    (lpa[0] - lpb[0]) ** 2 + (lpa[1] - lpb[1]) ** 2
+    (lpa[1] - lpb[1]) ** 2 + (lpa[0] - lpb[0]) ** 2
   end
 
   def dist_to_segment_squared(lpa, lpb, point)
@@ -20,11 +20,11 @@ class TrackIdentity::PointDistanceToSegment
 
     return distance_squared(point, lpa) if (l2 == 0)
 
-    t = ((point[0] - lpa[0]) * (lpb[0] - lpa[0]) + (point[1] - lpa[1]) * (lpb[1] - lpa[1])) / l2
+    t = ((point[1] - lpa[1]) * (lpb[1] - lpa[1]) + (point[0] - lpa[0]) * (lpb[0] - lpa[0])) / l2
     t = [0, [1, t].min].max
 
-    some_x = lpa[0] + t * (lpb[0] - lpa[0])
-    some_y = lpa[1] + t * (lpb[1] - lpa[1])
+    some_x = lpa[1] + t * (lpb[1] - lpa[1])
+    some_y = lpa[0] + t * (lpb[0] - lpa[0])
 
     distance_squared(point, [some_x, some_y])
   end

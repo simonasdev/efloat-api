@@ -54,8 +54,8 @@ ActiveRecord::Schema.define(version: 2018_07_11_195455) do
   end
 
   create_table "points", force: :cascade do |t|
-    t.float "x"
-    t.float "y"
+    t.integer "x"
+    t.integer "y"
     t.bigint "track_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
