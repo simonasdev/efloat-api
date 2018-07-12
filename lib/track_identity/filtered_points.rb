@@ -1,9 +1,7 @@
 require 'matrix'
 
-# ONLY WORKS WITH CARTESIAN VALUES
+# DEFINED BEHAVIOR ONLY WITH CARTESIAN VALUES
 class TrackIdentity::FilteredPoints
-  MAX_DIST = 0.003
-
   attr_reader :point_array, :lines
 
   def initialize(point_array)
@@ -19,7 +17,7 @@ class TrackIdentity::FilteredPoints
 
   def filtered_points
     assigned_points.select do |point|
-      point[:distance] <= MAX_DIST
+      point[:distance] <= TrackIdentity::MAX_DIST_FROM_TRACK
     end
   end
 
