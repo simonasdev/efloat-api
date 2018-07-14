@@ -19,8 +19,8 @@ class TrackIdentity::FilteredPoints
 
     all_points.select.with_index do |point, index|
       p "#{total} | #{index} done" if index % 100 == 0
-      # point_distance_to_line_segment([point[:x], point[:y]]) <= TrackIdentity::MAX_DIST_FROM_TRACK / TrackIdentity::SQUARE_SIZE
-      true
+      point_distance_to_line_segment([point[:x], point[:y]]) <= TrackIdentity::MAX_DIST_FROM_TRACK / TrackIdentity::SQUARE_SIZE
+      # true
     end
   end
 
@@ -29,10 +29,8 @@ class TrackIdentity::FilteredPoints
   end
 
   def point_distance_to_line_segment(point)
-    calculator = TrackIdentity::PointDistanceToSegment.new([], nil)
-
     distances = lines.map do |line|
-      calculator.dist_to_segment(*line, point)
+      TrackIdentity::PointDistanceToLineSegment.get(point, *line)
     end
 
     distances.min

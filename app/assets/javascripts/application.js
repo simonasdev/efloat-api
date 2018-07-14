@@ -20,7 +20,6 @@
 //= require moment/lt
 //= require bootstrap-datetimepicker
 //= require leaflet
-//= require leaflet-geometryutil/src/leaflet.geometryutil.js
 //= require_tree .
 
 $(document).on('turbolinks:load', function () {

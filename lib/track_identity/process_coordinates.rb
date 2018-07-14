@@ -2,7 +2,7 @@ class TrackIdentity::ProcessCoordinates
   attr_reader :coord_array
 
   def initialize(coord_array)
-    @coord_array = coord_array
+    @coord_array = coord_array.uniq
   end
 
   def run
@@ -13,7 +13,7 @@ class TrackIdentity::ProcessCoordinates
 
   def point_array
     coord_array.map do |lat, lng|
-      TrackIdentity::CoordToMeters.go(lat, lng)
+      TrackIdentity::CoordToMetersMercator.go_int(lat, lng)
     end
   end
 end

@@ -1,4 +1,4 @@
-class Point < ApplicationRecord
+class FloatPoint < ApplicationRecord
   belongs_to :track
 
   def coordinate

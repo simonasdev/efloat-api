@@ -1,26 +1,25 @@
 namespace :points do
-  task calculate: :environment do
+  task int: :environment do
     Point.delete_all
 
-    # Track.where(id: 248).each do |track|
-    #   points = TrackIdentity::ProcessCoordinates.new(track.route).run
-
-    #   points.each do |point|
-    #     Point.create(point.slice(:x, :y).merge(track: track))
-    #   end
-    # end
-
-    Track.where(id: 248).each do |track|
-
-      points = track.route.map do |coord|
-        TrackIdentity::CoordToMeters.go(*coord)
-      end.map do |x, y|
-        [x, y + 1]
-      end
+    Track.where(id: TrackIdentity::BEST_TRACK_ID).each do |track|
+      points = TrackIdentity::ProcessCoordinates.new(track.route).run
 
       points.each do |point|
-        # Point.create(point.slice(:x, :y).merge(track: track))
-        Point.create(x: point[0], y: point[1], track: track)
+        Point.create(point.slice(:x, :y).merge(track: track))
+      end
+    end
+  end
+
+  task float: :environment do
+    FloatPoint.delete_all
+
+    # test conversion
+    Track.where(id: TrackIdentity::BEST_TRACK_ID).each do |track|
+      points = TrackIdentity::ProcessCoordinates.new(track.route).run
+
+      points.each do |point|
+        FloatPoint.create(point.slice(:x, :y).merge(track: track))
       end
     end
   end
