@@ -14,7 +14,10 @@ module Import
       @race = race
       @sheet = RubyXL::Parser.parse(file)[0]
 
-      @directions = Directions.new(GoogleClient.new(key: Rails.application.credentials.google_maps_api_key, response_format: :json))
+      @directions = Directions.new(GoogleClient.new(
+        key: Rails.application.credentials.google_maps_api_key || Rails.application.secrets[:google_maps_api_key],
+        response_format: :json
+      ))
     end
 
     def run!
@@ -70,7 +73,7 @@ module Import
           }
           options[:waypoints] = attrs.delete(:waypoints)
 
-          next if options.values.all?(:blank?)
+          next if options.values.all?(&:blank?)
 
           result = directions.query(options).first.with_indifferent_access
 
