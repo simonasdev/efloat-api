@@ -13,7 +13,6 @@ module TrackIdentity::ProcessTracks
       Point.delete_all
 
       Track.limited.order(:id).each do |track|
-        File.write('log/process_tracks.log', track.id)
         puts("Generating identity for track #{track.name} ##{track.id}...")
 
         points = points_for_insert(track)
