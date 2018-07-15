@@ -2,7 +2,7 @@ class DataLine < ApplicationRecord
   BATTERY_VOLTAGES = (3.15..4.2)
 
   belongs_to :device, touch: true
-  belongs_to :race
+  belongs_to :race, optional: true
   belongs_to :limited_track, class_name: 'Track', optional: true
 
   scope :ordered, -> { order(:device_id, timestamp: :desc, id: :desc) }
