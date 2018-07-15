@@ -17,9 +17,10 @@ class DataLineWorker
       attrs[:data] = text
       attrs[:timestamp] = DateTime.strptime(attrs[:timestamp], '%s').in_time_zone
 
-      return if attrs[:timestamp] > Time.current || !valid_coordinate?(attrs[:latitude]) || !valid_coordinate?(attrs[:longitude])
+      lat, lng = attrs.values_at(:latitude, :longitude)
+      return if attrs[:timestamp] > Time.current || !valid_coordinate?(lat) || !valid_coordinate?(lng)
 
-      point = TrackIdentity::CoordToMetersMercator.get(*attrs.values_at(:latitude, :longitude))
+      point = TrackIdentity::CoordToMetersMercator.get(lat, lng)
       if track = Point.find_by([:x, :y].zip(point))&.track
         attrs[:speed_exceeded] = [attrs[:speed].to_i - track.speed_limit, 0].max if track.limited?
       end
