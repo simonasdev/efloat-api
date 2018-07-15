@@ -3,7 +3,7 @@ require 'capistrano-db-tasks'
 lock "~> 3.10.2"
 
 set :application, "efloat-api"
-set :repo_url, "git@me.bitbucket.org:efloat/efloat-api.git"
+set :repo_url, "git@github.com:simonasdev/efloat-api.git"
 set :deploy_to, "/home/efloat/efloat-api"
 
 append :rvm_map_bins, 'rails', 'sidekiq'
