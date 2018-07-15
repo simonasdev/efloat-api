@@ -38,6 +38,7 @@ class Device < ApplicationRecord
   private
 
   def notify_changes
+    Rails.logger.info "notifying, #{saved_changes}, #{self}"
     $redis.publish CHANNEL, DeviceSerializer.new(self).to_json
   end
 end
