@@ -40,7 +40,7 @@ class TrackIdentity::PointMatrix
   def point_matrix
     (bounds[:min_x]..bounds[:max_x]).flat_map do |x|
       (bounds[:min_y]..bounds[:max_y]).map do |y|
-        { x: x, y: y }
+        [x, y]
       end
     end
   end

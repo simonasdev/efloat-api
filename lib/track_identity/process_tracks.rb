@@ -30,6 +30,6 @@ module TrackIdentity::ProcessTracks
   def points_for_insert(track)
     points = TrackIdentity::ProcessCoordinates.new(track.route).run
 
-    points.map { |point| track.points.new(point.slice(:x, :y)) }
+    points.map { |point| track.points.new(x: point[0], y: point[1]) }
   end
 end

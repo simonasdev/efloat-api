@@ -15,8 +15,9 @@ class TrackIdentity::FilteredPoints
   def filtered_points
     total = all_points.size
 
-    all_points.select.with_index do |point, index|
-      distance_to_track([point[:x], point[:y]]) <= max_distance_adjusted
+    all_points.select do |point|
+      distance_to_track(point) <= max_distance_adjusted &&
+      distance_to_boundary(point) > max_distance_adjusted
     end
   end
 
@@ -26,6 +27,18 @@ class TrackIdentity::FilteredPoints
 
   def all_points
     @all_points ||= TrackIdentity::PointMatrix.new(point_array).run
+  end
+
+  def boundary_points
+    @boundary_points ||= [point_array.first, point_array.last]
+  end
+
+  def distance_to_boundary(point)
+    distances = boundary_points.map do |boundary_point|
+      TrackIdentity::PointDistanceToPoint.get(boundary_point, point)
+    end
+
+    distances.min
   end
 
   def distance_to_track(point)
