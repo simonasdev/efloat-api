@@ -17,7 +17,7 @@ class DataLineWorker
       attrs[:data] = text
       attrs[:timestamp] = DateTime.strptime(attrs[:timestamp], '%s').in_time_zone
 
-      lat, lng = attrs.values_at(:latitude, :longitude)
+      lat, lng = attrs.values_at(:latitude, :longitude).map(&:to_d)
       return if attrs[:timestamp] > Time.current || !valid_coordinate?(lat) || !valid_coordinate?(lng)
 
       point = TrackIdentity::CoordToMetersMercator.get(lat, lng)
@@ -33,6 +33,6 @@ class DataLineWorker
   end
 
   def valid_coordinate? coord
-    coord.to_d > 0 && coord.to_d <= 180
+    coord > 0 && coord <= 180
   end
 end
