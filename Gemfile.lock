@@ -35,6 +35,8 @@ GEM
       activemodel (= 5.2.0)
       activesupport (= 5.2.0)
       arel (>= 9.0)
+    activerecord-import (0.25.0)
+      activerecord (>= 3.2)
     activestorage (5.2.0)
       actionpack (= 5.2.0)
       activerecord (= 5.2.0)
@@ -309,6 +311,7 @@ PLATFORMS
 
 DEPENDENCIES
   aasm
+  activerecord-import
   bootsnap (>= 1.1.0)
   bootstrap-generators (~> 3.3.4)
   bootstrap-kaminari-views
@@ -358,4 +361,4 @@ RUBY VERSION
    ruby 2.5.1p57
 
 BUNDLED WITH
-   1.16.1
+   1.16.2

@@ -39,17 +39,7 @@ dl.dl-horizontal
 .row
   .col-xs-12
     - if @race.tracks.any?
-      / NORMAL
-      / #map data-tracks=(@race.tracks.map { |track| track.slice(:route, :id, :name, :length_in_km, :kind, :speed_limit, :start_time, :end_time) }.to_json)
-
-      / BEST_TRACK
-      / #map data-tracks=([Track.find(TrackIdentity::BEST_TRACK_ID).slice(:route, :id, :name, :length_in_km, :kind, :speed_limit, :start_time, :end_time)].to_json)
-
-      / POINT
-      #map data-tracks=([Track.find(TrackIdentity::BEST_TRACK_ID).slice(:id, :name, :length_in_km, :kind, :speed_limit, :start_time, :end_time).merge(route: Point.all.map(&:coordinate))].to_json)
-
-      / FLOAT_POINT
-      / #map data-tracks=([Track.find(TrackIdentity::BEST_TRACK_ID).slice(:id, :name, :length_in_km, :kind, :speed_limit, :start_time, :end_time).merge(route: FloatPoint.all.map(&:coordinate))].to_json)
+      #map data-tracks=(@race.tracks.map { |track| track.slice(:route, :id, :name, :length_in_km, :kind, :speed_limit, :start_time, :end_time) }.to_json)
 
       - @race.tracks.each do |track|
         i.absolute-tooltip data-toggle="tooltip" data-placement="right" data-trigger="manual" data-title="#{track.name}, #{track.kind}<br>Length: #{track.length_in_km}<br>Speed limit: #{track.speed_limit}km/h" data-id=track.id data-container='#map' data-html="true"

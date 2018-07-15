@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_07_14_100403) do
+ActiveRecord::Schema.define(version: 2018_07_15_075705) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -53,16 +53,6 @@ ActiveRecord::Schema.define(version: 2018_07_14_100403) do
     t.index ["state"], name: "index_devices_on_state"
   end
 
-  create_table "float_points", force: :cascade do |t|
-    t.float "x"
-    t.float "y"
-    t.bigint "track_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["track_id"], name: "index_float_points_on_track_id"
-    t.index ["x", "y"], name: "index_float_points_on_x_and_y", unique: true
-  end
-
   create_table "points", force: :cascade do |t|
     t.integer "x"
     t.integer "y"
@@ -70,7 +60,8 @@ ActiveRecord::Schema.define(version: 2018_07_14_100403) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["track_id"], name: "index_points_on_track_id"
-    t.index ["x", "y"], name: "index_points_on_x_and_y", unique: true
+    t.index ["x", "y", "track_id"], name: "index_points_on_x_and_y_and_track_id", unique: true
+    t.index ["x", "y"], name: "index_points_on_x_and_y"
   end
 
   create_table "races", force: :cascade do |t|

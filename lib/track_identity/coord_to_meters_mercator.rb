@@ -1,11 +1,7 @@
 module TrackIdentity::CoordToMetersMercator
-  RADIUS = 6_378_137.0 # of Earth
+  RADIUS = 6_378_137.0 # of Earth in meters
 
   module_function
-
-  def all(lat, lng)
-    reverse(*go_float(lat, lng))
-  end
 
   def go_int(lat, lng)
     lng_rad = lng / 180.0 * Math::PI

@@ -98,10 +98,6 @@ function initializeMap () {
         opacity: isSpeedTrack ? 1 : 0.3,
       });
 
-      route.forEach(function(point) {
-        L.marker(point).addTo(map);
-      });
-
       var $tooltip = $('.absolute-tooltip[data-id=' + track.id + ']');
 
       var startPosition = route[0];
@@ -124,7 +120,12 @@ function initializeMap () {
         event.target.setStyle({ weight: 5 });
       });
 
-      // polyline.addTo(map);
+      if (true) {
+        polyline.addTo(map);
+      } else {
+        // Draw track as points
+        route.forEach(function(point) { L.marker(point).addTo(map) });
+      }
 
       function popupText (name, position) {
         var speedLimit = track.kind === 'limited' ? '<br>Speed limit: ' + track.speed_limit : '';

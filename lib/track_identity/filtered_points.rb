@@ -1,5 +1,3 @@
-# DEFINED BEHAVIOR ONLY WITH CARTESIAN VALUES
-
 class TrackIdentity::FilteredPoints
   attr_reader :point_array, :lines
 
@@ -18,17 +16,19 @@ class TrackIdentity::FilteredPoints
     total = all_points.size
 
     all_points.select.with_index do |point, index|
-      p "#{total} | #{index} done" if index % 100 == 0
-      point_distance_to_line_segment([point[:x], point[:y]]) <= TrackIdentity::MAX_DIST_FROM_TRACK / TrackIdentity::SQUARE_SIZE
-      # true
+      distance_to_track([point[:x], point[:y]]) <= max_distance_adjusted
     end
+  end
+
+  def max_distance_adjusted
+    @max_distance_adjusted ||= TrackIdentity::MAX_DIST_FROM_TRACK / TrackIdentity::SQUARE_SIZE
   end
 
   def all_points
     @all_points ||= TrackIdentity::PointMatrix.new(point_array).run
   end
 
-  def point_distance_to_line_segment(point)
+  def distance_to_track(point)
     distances = lines.map do |line|
       TrackIdentity::PointDistanceToLineSegment.get(point, *line)
     end

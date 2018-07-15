@@ -2,7 +2,11 @@ module TrackIdentity::PointDistanceToLineSegment
   module_function
 
   def get(point, line_point_a, line_point_b)
-    dist_to_segment(point, line_point_a, line_point_b)
+    dist_to_segment(
+      point.map(&:to_f),
+      line_point_a.map(&:to_f),
+      line_point_b.map(&:to_f),
+    )
   end
 
   def distance_squared(lpa, lpb)

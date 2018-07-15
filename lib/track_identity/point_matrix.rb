@@ -6,7 +6,12 @@ class TrackIdentity::PointMatrix
   end
 
   def run
+    puts("Generating #{matrix_size} points...")
     point_matrix
+  end
+
+  def matrix_size
+    (bounds[:max_x] - bounds[:min_x] + 1) * (bounds[:max_y] - bounds[:min_y] + 1)
   end
 
   private
@@ -18,28 +23,25 @@ class TrackIdentity::PointMatrix
       min_x, max_x = transposed[0].min, transposed[0].max
       min_y, max_y = transposed[1].min, transposed[1].max
 
-      min_x, max_x = min_x - 100, max_x + 100
-      min_y, max_y = min_y - 100, max_y + 100
+      padding = TrackIdentity::MAX_DIST_FROM_TRACK / TrackIdentity::SQUARE_SIZE * 2
+
+      min_x, max_x = min_x - padding, max_x + padding
+      min_y, max_y = min_y - padding, max_y + padding
 
       {
-        min_x: min_x,
-        max_x: max_x,
-        min_y: min_y,
-        max_y: max_y,
+        min_x: min_x.to_i,
+        max_x: max_x.to_i,
+        min_y: min_y.to_i,
+        max_y: max_y.to_i,
       }
     end
   end
 
   def point_matrix
-    matrix = []
-
-    (bounds[:min_x]..bounds[:max_x]).step(TrackIdentity::SQUARE_SIZE).each do |x|
-      (bounds[:min_y]..bounds[:max_y]).step(TrackIdentity::SQUARE_SIZE).each do |y|
-        matrix << { x: x, y: y }
+    (bounds[:min_x]..bounds[:max_x]).flat_map do |x|
+      (bounds[:min_y]..bounds[:max_y]).map do |y|
+        { x: x, y: y }
       end
     end
-
-    matrix
   end
-
 end
