@@ -27,7 +27,7 @@ class DataLineWorker
 
       line = device.data_lines.create(attrs)
       device.update(current_data_line: line)
-
+      Rails.logger.info "#{CHANNEL}, #{DeviceSerializer.new(device).to_json}"
       $redis.publish CHANNEL, DeviceSerializer.new(device).to_json
     end
   end
