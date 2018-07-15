@@ -1,9 +1,11 @@
 module TrackIdentity
-  # how much leeway we give to the GPS data
-  MAX_DIST_FROM_TRACK = 50.to_f # meters
-  # how fine-grained the grid is
-  SQUARE_SIZE = 20.to_f # meters
-  # WARNING: changing above contants warrants reprocessing of all tracks!
+  # how much leeway we give to the GPS data in meters away from the track
+  MAX_DIST_FROM_TRACK = 50.to_f
+  # how fine-grained the grid is in meters
+  SQUARE_SIZE = 20.to_f
+  # to force recalc without changing stuff that matters
+  VERSION = 1
+  # WARNING: changing above constants warrants reprocessing of all tracks!
 
   LOG_PATH = 'log/track_identity.log'.freeze
 
@@ -16,7 +18,8 @@ module TrackIdentity
   def self_identity
     {
       'MAX_DIST_FROM_TRACK' => MAX_DIST_FROM_TRACK,
-      'SQUARE_SIZE' => SQUARE_SIZE
+      'SQUARE_SIZE' => SQUARE_SIZE,
+      'VERSION' => VERSION,
     }
   end
 

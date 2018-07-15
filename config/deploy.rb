@@ -32,6 +32,20 @@ namespace :puma do
   end
 end
 
+namespace :track_identity do
+  desc 'Check if track identities need to be regenerated'
+  task :check do
+    on roles(:all) do
+      within release_path do
+        with rails_env: fetch(:rails_env) do
+          execute :rake, 'track_identity:limited_tracks'
+        end
+      end
+    end
+  end
+end
+
 namespace :deploy do
+  after 'deploy:finished', 'track_identity:check'
   after 'deploy:finished', 'puma:restart'
 end

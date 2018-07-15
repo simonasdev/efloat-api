@@ -2,6 +2,11 @@ module TrackIdentity::ProcessTracks
   module_function
 
   def run
+    unless TrackIdentity.current_data_stale?
+      puts("Track identities up to date, skipping")
+      return
+    end
+
     Track.limited.each do |track|
       puts("Generating identity for track #{track.name} ##{track.id}...")
 
