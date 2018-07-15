@@ -19,6 +19,11 @@ class DataLineWorker
 
       return if attrs[:timestamp] > Time.current || !valid_coordinate?(attrs[:latitude]) || !valid_coordinate?(attrs[:longitude])
 
+      point = TrackIdentity::CoordToMetersMercator.get(*attrs.values_at(:latitude, :longitude))
+      if track = Point.find_by([:x, :y].zip(point))&.track
+        attrs[:speed_exceeded] = [attrs[:speed].to_i - track.speed_limit, 0].max if track.limited?
+      end
+
       line = device.data_lines.create(attrs)
       device.update(current_data_line: line)
 
