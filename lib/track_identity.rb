@@ -4,7 +4,7 @@ module TrackIdentity
   # how fine-grained the grid is in meters
   SQUARE_SIZE = 20.to_f
   # to force recalc without changing stuff that matters
-  VERSION = 1
+  VERSION = 2
   # WARNING: changing above constants warrants reprocessing of all tracks!
 
   LOG_PATH = 'log/track_identity.log'.freeze

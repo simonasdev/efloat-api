@@ -13,12 +13,6 @@ set :nvm_node, 'v10.3.0'
 append :linked_files, "config/master.key", 'config/puma.rb'
 append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/system"
 
-set :ssh_options, {
-  forward_agent: false,
-  auth_methods: %w[publickey],
-  keys: %w[~/.ssh/bitbucket]
-}
-
 set :db_local_clean, true
 
 set :init_system, :systemd
