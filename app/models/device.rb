@@ -27,7 +27,7 @@ class Device < ApplicationRecord
   scope :offline, -> { where(online: false) }
   scope :by_kind, ->(*_kinds) { where(kind: _kinds) }
 
-  after_update :notify_changes, if: -> { saved_changes.values_at(:current_data_line_id, :online).any?(&:present?) }
+  after_commit :notify_changes, on: :update, if: -> { saved_changes.values_at(:current_data_line_id, :online).any?(&:present?) }
 
   def self.connected
     numbers = $redis.get('devices:connected')
