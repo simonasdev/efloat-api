@@ -90,6 +90,8 @@ module Import
 
           race.tracks.create attrs
         end
+
+        TrackIdentity::ProcessTracks.run(true)
       end
     end
   end

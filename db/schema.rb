@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_07_15_075705) do
+ActiveRecord::Schema.define(version: 2018_07_15_131407) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -57,8 +57,6 @@ ActiveRecord::Schema.define(version: 2018_07_15_075705) do
     t.integer "x"
     t.integer "y"
     t.bigint "track_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
     t.index ["track_id"], name: "index_points_on_track_id"
     t.index ["x", "y", "track_id"], name: "index_points_on_x_and_y_and_track_id", unique: true
     t.index ["x", "y"], name: "index_points_on_x_and_y"

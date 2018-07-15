@@ -1,8 +1,8 @@
 module TrackIdentity::ProcessTracks
   module_function
 
-  def run
-    unless TrackIdentity.current_data_stale?
+  def run(force = false)
+    unless force || TrackIdentity.current_data_stale?
       puts("Track identities up to date, skipping")
       return
     end
