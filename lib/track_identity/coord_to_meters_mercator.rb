@@ -11,11 +11,13 @@ module TrackIdentity::CoordToMetersMercator
     y = RADIUS * Math.log((Math.sin(lat_rad) + 1) / Math.cos(lat_rad))
 
     [x, y].map do |float|
-      (float / TrackIdentity::SQUARE_SIZE).to_int
+      (float / TrackIdentity::SQUARE_SIZE).to_i
     end
   end
 
   def reverse(x, y)
+    x, y = x.to_f, y.to_f
+
     x *= TrackIdentity::SQUARE_SIZE
     y *= TrackIdentity::SQUARE_SIZE
 

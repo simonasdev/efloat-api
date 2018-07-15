@@ -31,7 +31,11 @@ ActiveRecord::Schema.define(version: 2018_07_15_131407) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.float "speed"
+    t.bigint "race_id"
+    t.bigint "limited_track_id"
     t.index ["device_id"], name: "index_data_lines_on_device_id"
+    t.index ["limited_track_id"], name: "index_data_lines_on_limited_track_id"
+    t.index ["race_id"], name: "index_data_lines_on_race_id"
   end
 
   create_table "devices", force: :cascade do |t|
