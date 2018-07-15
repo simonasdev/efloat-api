@@ -1,6 +1,7 @@
 class DataLineWorker
   include Sidekiq::Worker
 
+  CHANNEL = 'messages'.freeze
   ATTRS = %i(timestamp battery_voltage latitude north_south longitude west_east altitude speed orientation sos_count ok_count check)
 
   def perform identifier, text
@@ -20,6 +21,8 @@ class DataLineWorker
 
       line = device.data_lines.create(attrs)
       device.update(current_data_line: line)
+
+      $redis.publish CHANNEL, DeviceSerializer.new(device).to_json
     end
   end
 
