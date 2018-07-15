@@ -1,6 +1,8 @@
 class Device < ApplicationRecord
   include AASM
 
+  CHANNEL = 'messages'.freeze
+
   aasm column: :state do
     state :enabled, initial: true
     state :disabled
@@ -25,9 +27,17 @@ class Device < ApplicationRecord
   scope :offline, -> { where(online: false) }
   scope :by_kind, ->(*_kinds) { where(kind: _kinds) }
 
+  after_update :notify_changes, if: -> { saved_changes.values_at(:current_data_line_id, :online).any?(&:present?) }
+
   def self.connected
     numbers = $redis.get('devices:connected')
 
     numbers ? where(number: JSON.parse(numbers)).order('index::integer') : none
+  end
+
+  private
+
+  def notify_changes
+    $redis.publish CHANNEL, DeviceSerializer.new(self).to_json
   end
 end
