@@ -21,7 +21,7 @@ class DataLineWorker
       return if attrs[:timestamp] > Time.current || !valid_coordinate?(lat) || !valid_coordinate?(lng)
 
       point = TrackIdentity::CoordToMetersMercator.get(lat, lng)
-      if track = Point.find_by([:x, :y].zip(point))&.track
+      if track = Point.find_by([:x, :y].zip(point).to_h)&.track
         attrs[:speed_exceeded] = [attrs[:speed].to_i - track.speed_limit, 0].max if track.limited?
       end
 
