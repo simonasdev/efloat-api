@@ -10,6 +10,7 @@ module TrackIdentity::ProcessTracks
     # Clear identity cache
 
     ApplicationRecord.transaction do
+      puts 'delete'
       Point.delete_all
 
       Track.limited.order(:id).each do |track|
