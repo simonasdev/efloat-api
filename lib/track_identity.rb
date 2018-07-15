@@ -12,18 +12,14 @@ module TrackIdentity
   module_function
 
   def log_successful_generation
-    File.write(LOG_PATH, self_identity.to_json)
+    File.write(LOG_PATH, self_identity)
   end
 
   def self_identity
-    {
-      'MAX_DIST_FROM_TRACK' => MAX_DIST_FROM_TRACK,
-      'SQUARE_SIZE' => SQUARE_SIZE,
-      'VERSION' => VERSION,
-    }
+    "#{MAX_DIST_FROM_TRACK}|#{SQUARE_SIZE}|#{VERSION}"
   end
 
   def current_data_stale?
-    Dir[LOG_PATH].blank? || JSON.parse(File.read(LOG_PATH)) != self_identity
+    Dir[LOG_PATH].blank? || File.read(LOG_PATH) != self_identity
   end
 end

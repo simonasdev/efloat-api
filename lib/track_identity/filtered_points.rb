@@ -3,7 +3,7 @@ class TrackIdentity::FilteredPoints
 
   def initialize(point_array)
     @point_array = point_array
-    @lines = TrackIdentity::PointArrayToLines.new(point_array).run
+    @lines = TrackIdentity::PointArrayToLines.get(point_array)
   end
 
   def run

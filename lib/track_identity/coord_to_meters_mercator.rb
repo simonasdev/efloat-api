@@ -3,7 +3,7 @@ module TrackIdentity::CoordToMetersMercator
 
   module_function
 
-  def go_int(lat, lng)
+  def get(lat, lng)
     lng_rad = lng / 180.0 * Math::PI
     lat_rad = lat / 180.0 * Math::PI
 
@@ -12,18 +12,6 @@ module TrackIdentity::CoordToMetersMercator
 
     [x, y].map do |float|
       (float / TrackIdentity::SQUARE_SIZE).to_int
-    end
-  end
-
-  def go_float(lat, lng)
-    lng_rad = lng / 180.0 * Math::PI
-    lat_rad = lat / 180.0 * Math::PI
-
-    x = RADIUS * lng_rad
-    y = RADIUS * Math.log((Math.sin(lat_rad) + 1) / Math.cos(lat_rad))
-
-    [x, y].map do |float|
-      float / TrackIdentity::SQUARE_SIZE
     end
   end
 

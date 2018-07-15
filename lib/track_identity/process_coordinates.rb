@@ -13,7 +13,7 @@ class TrackIdentity::ProcessCoordinates
 
   def point_array
     coord_array.map do |lat, lng|
-      TrackIdentity::CoordToMetersMercator.go_int(lat, lng)
+      TrackIdentity::CoordToMetersMercator.get(lat, lng)
     end
   end
 end

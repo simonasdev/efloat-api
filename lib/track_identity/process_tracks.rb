@@ -7,23 +7,29 @@ module TrackIdentity::ProcessTracks
       return
     end
 
-    Track.limited.each do |track|
-      puts("Generating identity for track #{track.name} ##{track.id}...")
+    # Clear identity cache
 
-      points = TrackIdentity::ProcessCoordinates.new(track.route).run
-      points_for_insert = points.map { |point| track.points.new(point.slice(:x, :y)) }
+    ApplicationRecord.transaction do
+      Track.limited.order(:id).each do |track|
+        puts("Generating identity for track #{track.name} ##{track.id}...")
 
-      ApplicationRecord.transaction do
-        puts("Persisting identity for track #{track.name} ##{track.id}...")
-
+        points = points_for_insert(track)
         track.points.delete_all
-        Point.import points_for_insert
+        Point.import points
 
-        puts("#{track.name} ##{track.id} Done!")
+        puts("#{track.name} ID##{track.id} done with #{points.size} points!")
         puts
       end
     end
 
+    # Fill identity cache
+
     TrackIdentity.log_successful_generation
+  end
+
+  def points_for_insert(track)
+    points = TrackIdentity::ProcessCoordinates.new(track.route).run
+
+    points.map { |point| track.points.new(point.slice(:x, :y)) }
   end
 end
