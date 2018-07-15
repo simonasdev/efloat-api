@@ -10,11 +10,12 @@ module TrackIdentity::ProcessTracks
     # Clear identity cache
 
     ApplicationRecord.transaction do
+      Point.delete_all
+
       Track.limited.order(:id).each do |track|
         puts("Generating identity for track #{track.name} ##{track.id}...")
 
         points = points_for_insert(track)
-        track.points.delete_all
         Point.import points
 
         puts("#{track.name} ID##{track.id} done with #{points.size} points!")
