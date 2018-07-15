@@ -29,6 +29,10 @@ class Device < ApplicationRecord
 
   after_commit :notify_changes, on: :update, if: -> { saved_changes.values_at(:current_data_line_id, :online).any?(&:present?) }
 
+  def offline?
+    !online
+  end
+
   def self.connected
     numbers = $redis.get('devices:connected')
 

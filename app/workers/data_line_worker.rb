@@ -25,7 +25,7 @@ class DataLineWorker
       end
 
       line = device.data_lines.create(attrs)
-      device.update(current_data_line: line)
+      device.update(current_data_line: line, online: true)
     end
   end
 
