@@ -1,8 +1,6 @@
 namespace :track_identity do
   task limited_tracks: :environment do
-    puts 'processing'
     TrackIdentity::ProcessTracks.run
-    puts 'processed'
   end
 
   task fill_data_lines: :environment do
