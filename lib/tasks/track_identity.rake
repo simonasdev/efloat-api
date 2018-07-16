@@ -17,4 +17,10 @@ namespace :track_identity do
       dataline.update_column(:limited_track_id, track_id)
     end
   end
+
+  task fill_speed_exceeded: :environment do
+    DataLine.where.not(limited_track_id: nil).preload(:limited_track).find_each do |dl|
+      dl.update_column :speed_exceeded, [dl.speed - dl.limited_track.speed_limit, 0].max
+    end
+  end
 end

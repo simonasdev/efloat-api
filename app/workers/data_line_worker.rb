@@ -21,6 +21,7 @@ class DataLineWorker
 
       point = TrackIdentity::CoordToMetersMercator.get(lat, lng)
       if track = Point.find_by([:x, :y].zip(point).to_h)&.track
+        attrs[:limited_track_id] = track.id
         attrs[:speed_exceeded] = [attrs[:speed].to_i - track.speed_limit, 0].max if track.limited?
       end
 
