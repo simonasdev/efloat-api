@@ -6,6 +6,7 @@ class DataLine < ApplicationRecord
   belongs_to :limited_track, class_name: 'Track', optional: true
 
   scope :ordered, -> { order(:device_id, timestamp: :desc, id: :desc) }
+  scope :by_timestamp, ->(from, till) { where('data_lines.timestamp BETWEEN ? AND ?', from, till) }
 
   def name
     device.name
