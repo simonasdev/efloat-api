@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_07_17_194904) do
+ActiveRecord::Schema.define(version: 2018_07_17_212946) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,7 +33,6 @@ ActiveRecord::Schema.define(version: 2018_07_17_194904) do
     t.float "speed"
     t.bigint "race_id"
     t.bigint "limited_track_id"
-    t.float "speed_exceeded"
     t.index ["device_id"], name: "index_data_lines_on_device_id"
     t.index ["limited_track_id"], name: "index_data_lines_on_limited_track_id"
     t.index ["race_id"], name: "index_data_lines_on_race_id"

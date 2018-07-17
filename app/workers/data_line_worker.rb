@@ -12,6 +12,8 @@ class DataLineWorker
 
       attrs = ATTRS.zip(values).to_h
 
+      attrs[:race_id] = Race.current.id
+
       attrs[:cardinal_direction] = "#{attrs.delete(:north_south)}/#{attrs.delete(:west_east)}"
       attrs[:data] = text
       attrs[:timestamp] = DateTime.strptime(attrs[:timestamp], '%s').in_time_zone
@@ -22,7 +24,12 @@ class DataLineWorker
       point = TrackIdentity::CoordToMetersMercator.get(lat, lng)
       if track = Point.find_by([:x, :y].zip(point).to_h)&.track
         attrs[:limited_track_id] = track.id
-        attrs[:speed_exceeded] = [attrs[:speed].to_i - track.speed_limit, 0].max if track.limited?
+
+        if track.limited?
+          speed = [attrs[:speed].to_i - track.speed_limit, 0].max
+
+          SpeedExceedDataLine.create(attrs.merge(speed_exceeded: speed)) if speed > 0
+        end
       end
 
       line = device.data_lines.create(attrs)
