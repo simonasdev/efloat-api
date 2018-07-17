@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_07_15_173511) do
+ActiveRecord::Schema.define(version: 2018_07_17_194904) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -73,6 +73,43 @@ ActiveRecord::Schema.define(version: 2018_07_15_173511) do
     t.datetime "end_time"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "speed_exceed_processed", default: false
+  end
+
+  create_table "speed_exceed_data_lines", force: :cascade do |t|
+    t.bigint "race_id"
+    t.bigint "limited_track_id"
+    t.bigint "device_id"
+    t.text "data"
+    t.datetime "timestamp"
+    t.float "battery_voltage"
+    t.decimal "latitude", precision: 10, scale: 7
+    t.decimal "longitude", precision: 10, scale: 7
+    t.text "cardinal_direction"
+    t.float "altitude"
+    t.integer "orientation", default: 0
+    t.integer "sos_count"
+    t.integer "ok_count"
+    t.boolean "check", default: false, null: false
+    t.float "speed"
+    t.float "speed_exceeded"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["device_id"], name: "index_speed_exceed_data_lines_on_device_id"
+    t.index ["limited_track_id"], name: "index_speed_exceed_data_lines_on_limited_track_id"
+    t.index ["race_id"], name: "index_speed_exceed_data_lines_on_race_id"
+  end
+
+  create_table "speed_exceed_events", force: :cascade do |t|
+    t.bigint "race_id", null: false
+    t.bigint "track_id", null: false
+    t.bigint "device_id", null: false
+    t.integer "data_line_ids", null: false, array: true
+    t.integer "seconds", null: false
+    t.index ["device_id"], name: "index_speed_exceed_events_on_device_id"
+    t.index ["race_id"], name: "index_speed_exceed_events_on_race_id"
+    t.index ["seconds"], name: "index_speed_exceed_events_on_seconds"
+    t.index ["track_id"], name: "index_speed_exceed_events_on_track_id"
   end
 
   create_table "tickets", force: :cascade do |t|

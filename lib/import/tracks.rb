@@ -91,7 +91,7 @@ module Import
           race.tracks.create attrs
         end
 
-        TrackIdentity::ProcessTracks.run(true)
+        TrackIdentity::ProcessTracks.run(force: true)
       end
     end
   end
