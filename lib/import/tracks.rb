@@ -91,7 +91,7 @@ module Import
           race.tracks.create attrs
         end
 
-        TrackIdentity::ProcessTracks.run(force: true)
+        ProcessTracksWorker.perform_async
       end
     end
   end
