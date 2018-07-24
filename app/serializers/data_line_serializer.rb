@@ -6,7 +6,6 @@ class DataLineSerializer
              :latitude,
              :longitude,
              :speed,
-             :speed_exceeded,
              :cardinal_direction,
              :altitude,
              :sos,
