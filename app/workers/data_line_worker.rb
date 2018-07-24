@@ -12,7 +12,7 @@ class DataLineWorker
 
       attrs = ATTRS.zip(values).to_h
 
-      attrs[:race_id] = Race.current.id
+      attrs[:race_id] = Race.current.first&.id
 
       attrs[:cardinal_direction] = "#{attrs.delete(:north_south)}/#{attrs.delete(:west_east)}"
       attrs[:data] = text
