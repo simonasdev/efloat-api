@@ -64,7 +64,7 @@ class RacesController < ApplicationController
                      .preload(:device, :track)
     else
       flash[:error] = 'Fill all inputs'
-      redirect_back(fallback_location: race_path(race))
+      redirect_back(fallback_location: race_path(@race))
     end
   end
 
