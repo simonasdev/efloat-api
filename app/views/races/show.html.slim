@@ -25,16 +25,40 @@ dl.dl-horizontal
     | End time:
   dd
     = @race.end_time
-  / hr
-  / dt
-  / dd
-  /   .row
-  /     .col-md-3
-  /       = number_field_tag :speed, nil, placeholder: 'Speed exceeded', class: 'form-control'
-  /     .col-md-9
-  /       = link_to '#', class: 'btn btn-success', id: 'speed-report' do
-  /         span.glyphicon.glyphicon-dashboard
-  /         |  Speed report
+  hr
+  dt
+  dd
+    .row
+      .col-md-12
+        h4 Generate speed exceeded report
+    = form_tag speed_report_race_path(@race, format: :xlsx), method: :get do
+      .row
+        .col-md-6
+          .form-group
+            label
+              .input-group
+                span class="input-group-addon"
+                  span class="glyphicon glyphicon-calendar"
+                = text_field_tag :timestamp_from, nil, placeholder: 'Time from', class: 'form-control datetimepicker'
+        .col-md-6
+          .form-group
+            label
+              .input-group
+                span class="input-group-addon"
+                  span class="glyphicon glyphicon-calendar"
+                = text_field_tag :timestamp_until, nil, placeholder: 'Time until', class: 'form-control datetimepicker'
+      .row
+        .col-md-6
+          .form-group
+            = number_field_tag :speed, nil, placeholder: 'Exceeded amount', class: 'form-control'
+        .col-md-6
+          .form-group
+            = number_field_tag :time, nil, placeholder: 'Exceeded time, seconds', class: 'form-control'
+      .row
+        .col-md-12
+          = button_tag class: 'btn btn-success' do
+            span.glyphicon.glyphicon-dashboard
+            |  Generate
 
 .row
   .col-xs-12

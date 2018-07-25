@@ -1,4 +1,7 @@
 class SpeedExceed::Compact
+  MAX_SILENCE = 3
+  DECAY_RATE = 10 # to glue lines together, (line2.stamp - line1.stamp) >= line1.speed_exceed.to_f / DECAY_RATE
+
   attr_reader :race, :track, :device
 
   def self.for(race, track, device)
@@ -12,55 +15,59 @@ class SpeedExceed::Compact
   end
 
   def run
-    SpeedExceedEvent.import(speed_exceed_events) if speed_exceed_events.any?
+    speed_exceed_events.each do |event|
+      event.average_speed = event.get_data_lines.average(:speed_exceeded)
+    end
   end
 
   private
 
   def exceeded_datalines
-    exceeded_datalines ||= SpeedExceedDataLine
-      .where(race_id: race.id, limited_track_id: track.id, device_id: device.id)
+    @exceeded_datalines ||= SpeedExceedDataLine
+      .where(race: race, limited_track: track, device: device)
       .where('speed_exceeded > 0')
-      .order(timestamp: :asc)
+      .order(timestamp: :asc).to_a
   end
 
   def speed_exceed_events
     @speed_exceed_events ||= begin
       events = []
-      event = nil
 
-      last_timestamp = 0
+      exceed_time = 0
+      event_line_ids = []
 
-      exceeded_datalines.each do |dataline|
-        if dataline.timestamp - last_timestamp <= 1
-          last_timestamp = increment_speed_exceed_event(event, dataline)
-        else
-          events << event if event
-          event = build_speed_exceed_event
+      exceeded_datalines.each.with_index do |line, index|
+        event_line_ids << line.id
 
-          last_timestamp = increment_speed_exceed_event(event, dataline)
+        seconds_to_decay = line.speed_exceeded.to_f / DECAY_RATE
+        next_line = exceeded_datalines[index + 1]
+
+        if next_line
+          delta_time = next_line.timestamp.to_i - line.timestamp.to_i
+
+          if delta_time > MAX_SILENCE && delta_time > seconds_to_decay # next line is after decay
+            events << build_speed_exceed_event(event_line_ids, exceed_time)
+            exceed_time = 0
+            event_line_ids = []
+          else # next line is before decay (same event)
+            exceed_time += delta_time
+          end
+        else # last iteration
+          events << build_speed_exceed_event(event_line_ids, exceed_time)
         end
       end
 
-      events << event
       events
     end
   end
 
-  def build_speed_exceed_event
+  def build_speed_exceed_event(ids, time)
     SpeedExceedEvent.new(
       race: race,
       track: track,
       device: device,
-      data_line_ids: [],
-      seconds: 0,
+      data_line_ids: ids,
+      seconds: [time, 1].max,
     )
-  end
-
-  def increment_speed_exceed_event(event, dataline)
-    event.data_line_ids << dataline.id
-    event.seconds += 1
-
-    dataline.timestamp
   end
 end

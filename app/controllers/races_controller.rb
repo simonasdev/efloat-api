@@ -1,5 +1,5 @@
 class RacesController < ApplicationController
-  before_action :set_race, only: [:show, :edit, :update, :destroy, :import_tracks, :watch]
+  before_action :set_race, only: [:show, :edit, :update, :destroy, :import_tracks, :watch, :speed_report]
 
   def index
     @races = Race.all
@@ -52,7 +52,27 @@ class RacesController < ApplicationController
     @device = Device.find(params[:device_id])
   end
 
+  def speed_report
+    if speed_report_params.values.all?(&:present?)
+      timestamp_from, timestamp_until, speed, time = speed_report_params.values
+
+      response.headers['Content-Disposition'] = "inline; filename='#{@race.title} report #{time}-#{speed}.xlsx'"
+
+      @events = @race.speed_exceed_events
+                     .with_lines_by_range(timestamp_from, timestamp_until)
+                     .where('average_speed >= ? AND seconds >= ?', speed, time)
+                     .preload(:device, :track)
+    else
+      flash[:error] = 'Fill all inputs'
+      redirect_back(fallback_location: race_path(race))
+    end
+  end
+
   private
+
+  def speed_report_params
+    params.permit(:timestamp_from, :timestamp_until, :speed, :time)
+  end
 
   def set_race
     @race = Race.find(params[:id])

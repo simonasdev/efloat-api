@@ -25,6 +25,7 @@ Rails.application.routes.draw do
       post :import_tracks
       get :watch
       get 'watch/:device_id', action: :device, as: :watch_device
+      get :speed_report
     end
   end
 
