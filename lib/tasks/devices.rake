@@ -33,7 +33,7 @@ namespace :devices do
 
   desc 'Populate'
   task populate: :environment do
-    data = CSV.read('drivers.csv')
+    data = CSV.read('drivers-zarasai.csv')
 
     Device.transaction do
       data.each_with_index do |arr, index|
@@ -42,6 +42,7 @@ namespace :devices do
         d.update!(
           kind: arr[0],
           name: arr[2],
+          position: arr[1],
           crew_data: {
             car: arr[3],
             country: arr[4]
