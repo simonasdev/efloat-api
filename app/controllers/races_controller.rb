@@ -1,5 +1,5 @@
 class RacesController < ApplicationController
-  before_action :set_race, only: [:show, :edit, :update, :destroy, :import_tracks, :watch, :speed_report]
+  before_action :set_race, only: [:show, :edit, :update, :destroy, :import_tracks, :import_markers, :watch, :speed_report]
 
   def index
     @races = Race.all
@@ -43,6 +43,12 @@ class RacesController < ApplicationController
     Import::Tracks.new(@race, params[:file].tempfile).run!
 
     redirect_to @race, notice: 'Tracks successfully imported'
+  end
+
+  def import_markers
+    Import::Markers.new(@race, params[:file].tempfile).run!
+
+    redirect_to @race, notice: 'Markers successfully imported'
   end
 
   def watch

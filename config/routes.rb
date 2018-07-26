@@ -23,6 +23,7 @@ Rails.application.routes.draw do
   resources :races do
     member do
       post :import_tracks
+      post :import_markers
       get :watch
       get 'watch/:device_id', action: :device, as: :watch_device
       get :speed_report

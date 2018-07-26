@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_07_25_201722) do
+ActiveRecord::Schema.define(version: 2018_07_26_211944) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -55,6 +55,20 @@ ActiveRecord::Schema.define(version: 2018_07_25_201722) do
     t.index ["kind"], name: "index_devices_on_kind"
     t.index ["position"], name: "index_devices_on_position"
     t.index ["state"], name: "index_devices_on_state"
+  end
+
+  create_table "markers", force: :cascade do |t|
+    t.decimal "latitude", precision: 10, scale: 7
+    t.decimal "longitude", precision: 10, scale: 7
+    t.integer "kind", default: 0, null: false
+    t.text "number"
+    t.bigint "race_id"
+    t.bigint "track_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["kind"], name: "index_markers_on_kind"
+    t.index ["race_id"], name: "index_markers_on_race_id"
+    t.index ["track_id"], name: "index_markers_on_track_id"
   end
 
   create_table "points", force: :cascade do |t|
