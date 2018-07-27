@@ -15,6 +15,7 @@ class Device < ApplicationRecord
   enum kind: %i[driver security ambulance other]
 
   has_many :data_lines, dependent: :delete_all
+  has_many :speed_exceed_data_lines
   belongs_to :current_data_line, class_name: 'DataLine', optional: true
 
   scope :listing, -> {
