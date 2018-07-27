@@ -1,6 +1,6 @@
 class DeviceSerializer
   include FastJsonapi::ObjectSerializer
-  attributes :id, :name, :number, :comment, :online, :position, :car, :country, :state
+  attributes :id, :name, :number, :comment, :online, :position, :car, :country, :state, :kind
 
   attribute :current_data_line do |object|
     DataLineSerializer.new(object.current_data_line)
