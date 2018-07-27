@@ -42,7 +42,7 @@ namespace :devices do
         d.update!(
           kind: arr[0],
           name: arr[2],
-          position: arr[1],
+          position: arr[5].presence || arr[1],
           crew_data: {
             car: arr[3],
             country: arr[4]
