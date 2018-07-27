@@ -5,7 +5,7 @@ header_style = { bg_color: "00", fg_color: "FF", alignment: { horizontal: :cente
 wb.add_worksheet(name: "Ataskaita") do |sheet|
   sheet.add_row [
     'Driver',
-    'Speed limit',
+    'Track, speed limit',
     'Seconds',
     'Average exceeded speed',
     'Average speed',
@@ -19,7 +19,7 @@ wb.add_worksheet(name: "Ataskaita") do |sheet|
 
     sheet.add_row [
       event.device.name,
-      event.track.speed_limit,
+      "#{event.track.name}, #{event.track.speed_limit}km/h",
       event.seconds,
       event.average_speed,
       event.track.speed_limit + event.average_speed,
