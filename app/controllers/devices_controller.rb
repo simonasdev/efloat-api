@@ -4,8 +4,8 @@ class DevicesController < ApplicationController
   skip_before_action :authenticate_user!, only: %i(index), if: :json_request?
 
   def index
-    @devices = Device.listing
-    @devices = @devices.where(index: params[:index_eq]) if params[:index_eq].present?
+    @q = Device.ransack(params[:q])
+    @devices = @q.result.listing
   end
 
   def show

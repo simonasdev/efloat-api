@@ -7,9 +7,15 @@
 
 .row
   .col-xs-12
-    = form_tag devices_path, method: :get do
-      .col-md-4
-        = text_field_tag :index_eq, nil, placeholder: 'Index', class: 'form-control'
+    = search_form_for @q do |f|
+      .row
+        .col-md-4
+          = f.search_field :index_eq, placeholder: 'Index', class: 'form-control'
+        .col-md-4
+          = f.search_field :name_cont, placeholder: 'Name', class: 'form-control'
+        .col-md-4
+          = f.search_field :position_eq, placeholder: 'Position', class: 'form-control'
+        input.invisible type="submit" tabindex="-1"
 hr
 .table-responsive
   table.table.table-striped.table-bordered.table-hover
