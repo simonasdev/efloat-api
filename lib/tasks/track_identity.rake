@@ -4,17 +4,20 @@ namespace :track_identity do
   end
 
   task fill_data_lines: :environment do
-    total = DataLine.count
+    Race.last.data_lines.where('timestamp < ?', Time.current.beginning_of_hour).preload(:device).each do |dataline|
+      point = TrackIdentity::CoordToMetersMercator.get(dataline.latitude, dataline.longitude)
 
-    DataLine.find_each.with_index do |dataline, index|
-      p("#{total} | #{index}") if index % 1000 == 0
+      if track = Point.find_by([:x, :y].zip(point).to_h)&.track
+        if track.limited?
+          speed = [dataline.speed - track.speed_limit, 0].max
 
-      coord_id = TrackIdentity::CoordToMetersMercator.get(dataline.latitude, dataline.longitude)
-      track_id = Point.find_by(x: coord_id[0], y: coord_id[1])&.track_id
+          dataline.device.speed_exceed_data_lines.create!(
+            dataline.attributes.except('id').merge(speed_exceeded: speed)
+          ) if speed > 0
 
-      next unless track_id
-
-      dataline.update_column(:limited_track_id, track_id)
+          dataline.update_column(:limited_track_id, track.id)
+        end
+      end
     end
   end
 end

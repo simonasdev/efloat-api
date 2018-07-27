@@ -59,6 +59,8 @@ class RacesController < ApplicationController
   end
 
   def speed_report
+    SpeedExceed::ProcessRace.run(race) unless race.speed_exceed_processed?
+
     if speed_report_params.values.all?(&:present?)
       timestamp_from, timestamp_until, speed, time = speed_report_params.values
 
