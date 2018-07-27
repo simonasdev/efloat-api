@@ -2,14 +2,16 @@ driver,1,Vigo Rubenis/Kristaps Eglite,Subaru Impreza,LV
 driver,2,Mareks Svarcs Svampans/Armands Lukins,Subaru Impreza,LV
 driver,3,Ingus Eislers/Martinš Tūters,Subaru Impreza,LV
 driver,4,Dmitry Feofanov/Normunds Kokins,Mistusbishi Lancer Evo X,LV
-driver,5,Janis Grinbergs/Janis Strandinš,BMW 320,LT
+driver,5,,,
+driver,13,Janis Grinbergs/Janis Strandinš,BMW 320,LT
 driver,6,Andris Vovers/Aldis Hanzens,BMW 3,LV
 driver,7,Justas Simaška/Titas Simaška,BMW 325,LT
 driver,8,Uldis Lepiksons/Ainars Šteinbergs,Ford Puma,LV
 driver,9,Aigars Titmanis/Uldis Fjodorovs,BMW 325,LV
 driver,10,Simonas Bieliauskas/Julius Vandys,BMW Compact,LT
 driver,11,Krišjanis Zintis Putninš/Martinš Purinš,Subaru Impreza,LV
-driver,12,Aurimas Buteikis/Dovydas Ketvirtis,Honda Civic Type-R,LT
+driver,12,,,
+driver,73,Aurimas Buteikis/Dovydas Ketvirtis,Honda Civic Type-R,LT
 driver,14,Gints Lapsa/Kaspars Linde,BMW 325,LV
 driver,15,Deividas Gezevičius/Lukas Pečeliūnas,Opel Astra,LT
 driver,16,Kristaps Sarma/Sanris Druks,Mistusbishi Lancer Evo IX,LV
@@ -18,14 +20,16 @@ driver,18,Tadas Sireika/Giedrius Šileikis,BMW Compact,LT
 driver,19,Vitalijus Plastininas/Vytenis Plastininas,Mitsubishi Lancer Evo,LT
 driver,20,Andris Putnins/Raimonds Glauda,Rover 214,LV
 driver,21,Tomas Ramanauskas/Virginijus Janulevičius,Subaru Impreza WRX STI,LT
-driver,22,Lauris Ozerovs/Gatis Jansons,Subaru Impreza,LV
+driver,22,,,
+driver,75,Lauris Ozerovs/Gatis Jansons,Subaru Impreza,LV
 driver,23,Dainius Pranys/Lukas Baltramiejūnas,BMW 318,LT
 driver,24,Janis Krevics/Kristers Cimdinš,Audi 90,LV
 driver,25,Madars Dirinš/Gints Lasmanis,Renault Clio,LV
 driver,26,Karolis Balčiūnas/Erikas Sevriukovas,Subaru Impreza,LT
 driver,27,Jonas Sluckus/Povilas Reisas,Mitsubishi Lancer Evo,LT
 driver,28,Vladas Jurkevičius/Edvinas Bieliauskas,Opel Astra,LT
-driver,29,Marius Vėgėlė/Julius Marcinkevičius,BMW 325,LT
+driver,29,,,
+driver,76,Marius Vėgėlė/Julius Marcinkevičius,BMW 325,LT
 driver,30,Evaldas Gezevičius/Šarūnas Gumauskas,Opel Kadett,LT
 driver,31,Marius Dainys/Justinas Vainiūnas,VW Golf III,LT
 driver,32,Remigijus Šapranauskas/Nerijus Genys,Honda Civic Type-R,LT
@@ -53,10 +57,12 @@ driver,53,Giedrius Notkus/Dalius Strižanas,Mitsubishi Lancer Evo IX,LT
 driver,54,Janis Vorobjovs/Ivo Pūkis,BMW M3,LV
 driver,55,Giedrius Firantas/Matas Valiulis,BMW M3,LT
 driver,56,Jonas Pipiras/Aisvydas Paliukėnas,Ford Fiesta R2T,LT
-driver,57,Justas Tamašauskas/Vaidas Šmigelskas,BMW M3,LT
+driver,57,,,
+driver,77,Justas Tamašauskas/Vaidas Šmigelskas,BMW M3,LT
 driver,58,Eugenijus Sladkevičius/Gediminas Saudargas,Mitsubishi EVO X,LT
 driver,59,Evaldas Joteika/Artūras Šabanavičius,VW Golf,LT
-driver,60,Vytautas Požerinis/Adomas Rimša,Mitsubishi EVO VIII,LT
+driver,60,,,
+driver,79,Vytautas Požerinis/Adomas Rimša,Mitsubishi EVO VIII,LT
 driver,61,Sergij Potiyko/Ivan Mishyn,Mitsubishi Lancer Evo X,UKR
 driver,62,Darius Biesevičius/Stasys Tarailė,Mitsubishi Lancer,LT
 driver,63,Laurynas Diržininkas/Mindaugas Valiukas,Ford Fiesta R2,LT
