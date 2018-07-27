@@ -1,7 +1,7 @@
 class Device < ApplicationRecord
   include AASM
 
-  NOTIFIABLE_ATTRIBUTES = %i[current_data_line_id online status]
+  NOTIFIABLE_ATTRIBUTES = %i[current_data_line_id online state]
 
   CHANNEL = 'messages'.freeze
 
