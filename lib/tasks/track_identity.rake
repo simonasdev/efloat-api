@@ -13,7 +13,7 @@ namespace :track_identity do
           speed = [dataline.speed - track.speed_limit, 0].max
 
           dataline.device.speed_exceed_data_lines.create!(
-            dataline.attributes.except('id').merge(speed_exceeded: speed, track: track, race: race)
+            dataline.attributes.except('id').merge(speed_exceeded: speed, limited_track: track, race: race)
           ) if speed > 0
 
           dataline.update_column(:limited_track_id, track.id)
