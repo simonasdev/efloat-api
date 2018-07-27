@@ -5,28 +5,35 @@
   h1
     | Listing devices
 
+.row
+  .col-xs-12
+    = form_tag devices_path, method: :get do
+      .col-md-4
+        = text_field_tag :index_eq, nil, placeholder: 'Index', class: 'form-control'
+hr
 .table-responsive
   table.table.table-striped.table-bordered.table-hover
     thead
       tr
         th Number
+        th Index
         th Name
         th Position
         th Kind
-        th State
         th
-        th
-        th
+        th Action
     tbody
       - @devices.each do | device |
         tr
           td= device.number
+          td= device.index
           td= device.name
           td= device.position
           td= device.kind
-          td= device.state
-          td= link_to 'Show', device
-          td= link_to 'Edit', edit_device_path(device)
+          td
+            = link_to 'Show', device
+            br
+            = link_to 'Edit', edit_device_path(device)
           td
             - if device.enabled?
               = link_to 'Disable', device_path(device, { device: { state: :disabled } }), method: :patch, class: 'btn btn-danger'

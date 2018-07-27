@@ -5,6 +5,7 @@ class DevicesController < ApplicationController
 
   def index
     @devices = Device.listing
+    @devices = @devices.where(index: params[:index_eq]) if params[:index_eq].present?
   end
 
   def show
