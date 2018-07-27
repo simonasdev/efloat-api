@@ -24,12 +24,11 @@ class DataLineWorker
       point = TrackIdentity::CoordToMetersMercator.get(lat, lng)
       if track = Point.find_by([:x, :y].zip(point).to_h)&.track
         attrs[:limited_track_id] = track.id
-        Rails.logger.info "found point, track - #{track.id}"
+
         if track.limited?
           speed = [attrs[:speed].to_i - track.speed_limit, 0].max
 
-          Rails.logger.info "speed - #{speed}"
-          SpeedExceedDataLine.create(attrs.merge(speed_exceeded: speed)) if speed > 0
+          device.speed_exceed_data_lines.create!(attrs.merge(speed_exceeded: speed)) if speed > 0
         end
       end
 
