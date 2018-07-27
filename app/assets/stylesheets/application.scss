@@ -22,7 +22,7 @@ body {
     float: right;
   }
 
-  a.btn + a.btn, a.btn + form, form + a.btn {
+  a.btn + a.btn, a.btn + form, form + a.btn, form + form {
     margin-right: 8px;
   }
 }
