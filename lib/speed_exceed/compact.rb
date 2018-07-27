@@ -1,6 +1,6 @@
 class SpeedExceed::Compact
   MAX_SILENCE = 3
-  DECAY_RATE = 10 # to glue lines together, (line2.stamp - line1.stamp) >= line1.speed_exceed.to_f / DECAY_RATE
+  DECAY_RATE = 5 # to glue lines together, (line2.stamp - line1.stamp) >= line1.speed_exceed.to_f / DECAY_RATE
 
   attr_reader :race, :track, :device
 
