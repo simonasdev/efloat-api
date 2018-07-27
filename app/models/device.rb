@@ -8,6 +8,7 @@ class Device < ApplicationRecord
   aasm column: :state do
     state :enabled, initial: true
     state :disabled
+    state :hidden
     state :technical
     state :retired
   end
