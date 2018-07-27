@@ -4,14 +4,14 @@
     span.glyphicon.glyphicon-wrench
     |  Calibrate
 
-.links
-  - default_period = 1000
-  .row
-    .col-md-6.col-sm-8
-      = number_field_tag 'period', nil, placeholder: "Period, default: #{ default_period }", class: 'form-control', min: 100, max: 3600000
-  = link_to command_device_path(device, value: "start,#{ default_period }"), class: 'btn btn-success', method: :post, remote: remote do
-    span.glyphicon.glyphicon-cloud-upload
-    |  Start
+/ .links
+/   - default_period = 1000
+/   .row
+/     .col-md-6.col-sm-8
+/       = number_field_tag 'period', nil, placeholder: "Period, default: #{ default_period }", class: 'form-control', min: 100, max: 3600000
+/   = link_to command_device_path(device, value: "start,#{ default_period }"), class: 'btn btn-success', method: :post, remote: remote do
+/     span.glyphicon.glyphicon-cloud-upload
+/     |  Start
   / = link_to command_device_path(device, value: 'stop'), class: 'btn btn-danger', method: :post, remote: remote do
   /   span.glyphicon.glyphicon-stop
   /   |  Stop
