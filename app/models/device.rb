@@ -1,6 +1,8 @@
 class Device < ApplicationRecord
   include AASM
 
+  NOTIFIABLE_ATTRIBUTES = %i[current_data_line_id online status]
+
   CHANNEL = 'messages'.freeze
 
   aasm column: :state do
@@ -28,7 +30,7 @@ class Device < ApplicationRecord
   scope :offline, -> { where(online: false) }
   scope :by_kind, ->(*_kinds) { where(kind: _kinds) }
 
-  after_commit :notify_changes, on: :update, if: -> { saved_changes.values_at(:current_data_line_id, :online).any?(&:present?) }
+  after_commit :notify_changes, on: :update, if: -> { saved_changes.values_at(*NOTIFIABLE_ATTRIBUTES).any?(&:present?) }
 
   def offline?
     !online
