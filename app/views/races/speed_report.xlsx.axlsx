@@ -3,7 +3,16 @@ wb = xlsx_package.workbook
 header_style = { bg_color: "00", fg_color: "FF", alignment: { horizontal: :center }, bold: true }
 
 wb.add_worksheet(name: "Ataskaita") do |sheet|
-  sheet.add_row ['Driver', 'Speed limit', 'Average exceeded speed', 'Average speed', 'Timestamps', 'Speeds', 'Coordinates'], header_style
+  sheet.add_row [
+    'Driver',
+    'Speed limit',
+    'Seconds',
+    'Average exceeded speed',
+    'Average speed',
+    'Timestamps',
+    'Speeds',
+    'Coordinates'
+  ], header_style
 
   @events.each do |event|
     lines = event.get_data_lines.ordered.select(:timestamp, :speed, :latitude, :longitude)
@@ -11,6 +20,7 @@ wb.add_worksheet(name: "Ataskaita") do |sheet|
     sheet.add_row [
       event.device.name,
       event.track.speed_limit,
+      event.seconds,
       event.average_speed,
       event.track.speed_limit + event.average_speed,
       lines.map(&:timestamp).join("\n"),
