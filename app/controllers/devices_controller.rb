@@ -30,7 +30,7 @@ class DevicesController < ApplicationController
 
   def update
     if @device.update(device_params)
-      @notice = @device.saved_change_to_state? ? "State changed to #{@device.state}" : 'Device was successfully updated'
+      @notice = device_params[:state].present? ? "State changed to #{@device.state}" : 'Device was successfully updated'
 
       respond_to do |format|
         format.js
