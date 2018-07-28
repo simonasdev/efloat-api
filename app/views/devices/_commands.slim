@@ -34,3 +34,8 @@
   = link_to command_device_path(device, value: 'zero,up'), class: 'btn btn-info', method: :post, remote: remote do
     span.glyphicon.glyphicon-repeat
     |  Zero UP
+
+.links
+  = link_to 'Hide', device_path(device, { device: { state: :hidden } }), method: :patch, remote: remote, class: 'btn btn-warning'
+  = link_to 'Enable', device_path(device, { device: { state: :enabled } }), method: :patch, remote: remote, class: 'btn btn-success'
+  = link_to 'Disable', device_path(device, { device: { state: :disabled } }), method: :patch, remote: remote, class: 'btn btn-danger'

@@ -30,7 +30,10 @@ class DevicesController < ApplicationController
 
   def update
     if @device.update(device_params)
-      redirect_to @device, notice: 'Device was successfully updated.'
+      respond_to do |format|
+        format.js
+        format.html { redirect_to @device, notice: 'Device was successfully updated.' }
+      end
     else
       render :edit
     end
