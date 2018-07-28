@@ -15,6 +15,6 @@ class DataLine < ApplicationRecord
   def battery_percentage
     min = BATTERY_VOLTAGES.begin
 
-    ((battery_voltage - min) / (BATTERY_VOLTAGES.end - min) * 100).round(1)
+    [((battery_voltage - min) / (BATTERY_VOLTAGES.end - min) * 100).round(1), 100].min
   end
 end

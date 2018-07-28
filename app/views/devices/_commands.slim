@@ -39,3 +39,13 @@
   = link_to 'Hide', device_path(device, { device: { state: :hidden } }), method: :patch, remote: remote, class: 'btn btn-warning'
   = link_to 'Enable', device_path(device, { device: { state: :enabled } }), method: :patch, remote: remote, class: 'btn btn-success'
   = link_to 'Disable', device_path(device, { device: { state: :disabled } }), method: :patch, remote: remote, class: 'btn btn-danger'
+
+.links
+  = form_for(device, remote: true, html: { class: "form-horizontal", role: "form" }) do |f|
+    .form-group
+      .col-xs-12
+        = f.label :comment, class: "control-label"
+        = f.text_field :comment, class: "form-control"
+    .form-group
+      .col-xs-12
+        = f.submit 'Update', class: "btn btn-primary"

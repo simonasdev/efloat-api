@@ -30,9 +30,11 @@ class DevicesController < ApplicationController
 
   def update
     if @device.update(device_params)
+      @notice = @device.saved_change_to_state? ? "State changed to #{@device.state}" : 'Device was successfully updated'
+
       respond_to do |format|
         format.js
-        format.html { redirect_to @device, notice: 'Device was successfully updated.' }
+        format.html { redirect_to @device, notice: @notice }
       end
     else
       render :edit

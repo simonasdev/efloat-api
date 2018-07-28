@@ -1,1 +1,1 @@
-$('.device-actions dl').after("<%= j render_flash :notice, "State changed to #{@device.state}" %>");
+$('.device-actions dl').after("<%= j render_flash :notice, @notice %>");
