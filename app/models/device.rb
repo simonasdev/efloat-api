@@ -27,6 +27,7 @@ class Device < ApplicationRecord
       CASE WHEN devices.position ~ '^\d+$' THEN devices.position::integer ELSE NULL END ASC NULLS LAST
     ))).preload(:current_data_line)
   }
+  scope :not_disabled, -> { where.not(state: :disabled) }
   scope :online, -> { where(online: true) }
   scope :offline, -> { where(online: false) }
   scope :by_kind, ->(*_kinds) { where(kind: _kinds) }

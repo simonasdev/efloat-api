@@ -8,6 +8,6 @@ class Race < ApplicationRecord
   scope :speed_exceed_unprocessed, -> { where(speed_exceed_processed: false) }
 
   def devices
-    Device.enabled
+    Device.not_disabled
   end
 end
