@@ -6,6 +6,7 @@ class Race < ApplicationRecord
 
   scope :current, -> { where('start_time < :now AND end_time > :now', now: Time.current).preload(:tracks) }
   scope :speed_exceed_unprocessed, -> { where(speed_exceed_processed: false) }
+  scope :ordered, -> { order(:start_time) }
 
   def devices
     Device.not_disabled

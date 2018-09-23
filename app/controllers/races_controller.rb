@@ -2,7 +2,7 @@ class RacesController < ApplicationController
   before_action :set_race, only: [:show, :edit, :update, :destroy, :import_tracks, :import_markers, :watch, :speed_report]
 
   def index
-    @races = Race.all
+    @races = Race.ordered
   end
 
   def show
