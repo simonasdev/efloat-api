@@ -33,7 +33,7 @@ namespace :devices do
 
   desc 'Populate'
   task populate: :environment do
-    data = CSV.read('drivers-zarasai.csv')
+    data = CSV.read('drivers.csv')
 
     Device.transaction do
       data.each_with_index do |arr, index|
