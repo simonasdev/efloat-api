@@ -28,22 +28,14 @@ module Import
 
         values = row.cells.map { |cell| cell && cell.value }
 
-        parse_coords = -> value do
-          coords = value.split(',').map { |c| c.split('.', 3) }
-
-          if coords.first.size === 3 && coords.last.size === 3
-            Geo::Coord.new(GEO_ATTRS.zip(coords.flatten.map(&:to_i)).to_h).to_s(dms: false)
-          else
-            value
-          end
-        end
-
         values = values.map.with_index do |value, i|
           if i < 3 && value.present?
+            formatted_value = value.to_s.strip.chomp(',').squeeze(', ').gsub(', ', "\n").gsub(' ', ',')
+
             if i == 1
-              value.to_s.split("\n").map(&parse_coords).join("\n")
+              formatted_value.split("\n").map(&method(:parse_coords)).join("\n")
             else
-              parse_coords.call value
+              parse_coords(formatted_value)
             end
           else
             value
@@ -92,6 +84,18 @@ module Import
         end
 
         ProcessTracksWorker.perform_async
+      end
+    end
+
+    private
+
+    def parse_coords(value)
+      coords = value.split(',').map { |c| c.split('.', 3) }
+
+      if coords.first.size === 3 && coords.last.size === 3
+        Geo::Coord.new(GEO_ATTRS.zip(coords.flatten.map(&:to_i)).to_h).to_s(dms: false)
+      else
+        value
       end
     end
   end
