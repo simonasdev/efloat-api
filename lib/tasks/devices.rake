@@ -36,7 +36,7 @@ namespace :devices do
     data = CSV.read('drivers.csv')
 
     Device.transaction do
-      data.each_with_index do |arr, index|
+      data.each do |arr|
         d = Device.find_by(index: arr[5].presence || arr[1])
 
         d.update!(
@@ -108,14 +108,6 @@ namespace :devices do
           csv << [name, data_line.slice(:latitude, :longitude, :speed, :timestamp).values].flatten if data_line
         end
       end
-    end
-  end
-
-  desc 'Sync indices with start positions'
-  task sync: :environment do
-    Device.update_all 'position = index'
-    CSV.read('positions.csv').each do |(index, position)|
-      Device.find_by(index: index).update position: position
     end
   end
 end
