@@ -10,9 +10,10 @@ module Import
 
     attr_reader :race, :sheet, :directions
 
-    def initialize race, file
+    def initialize(race, file, limited: false)
       @race = race
       @sheet = RubyXL::Parser.parse(file)[0]
+      @limited = limited
 
       @directions = Directions.new(GoogleClient.new(
         key: Rails.application.credentials.google_maps_api_key || Rails.application.secrets[:google_maps_api_key],
@@ -56,7 +57,7 @@ module Import
       end
 
       race.transaction do
-        race.tracks.destroy_all
+        (@limited ? race.tracks.limited : race.tracks).destroy_all
 
         track_data.each do |attrs|
           options = {
@@ -83,7 +84,7 @@ module Import
           race.tracks.create attrs
         end
 
-        ProcessTracksWorker.perform_async
+        ProcessTracksWorker.perform_async(race.id)
       end
     end
 

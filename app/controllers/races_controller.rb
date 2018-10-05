@@ -1,5 +1,5 @@
 class RacesController < ApplicationController
-  before_action :set_race, only: [:show, :edit, :update, :destroy, :import_tracks, :import_markers, :watch, :speed_report]
+  before_action :set_race, only: %i[show edit update destroy import_tracks import_markers watch speed_report import_limited_tracks]
 
   def index
     @races = Race.ordered
@@ -37,6 +37,12 @@ class RacesController < ApplicationController
     @race.destroy
 
     redirect_to races_url, notice: 'Race was successfully destroyed.'
+  end
+
+  def import_limited_tracks
+    Import::Tracks.new(@race, params[:file].tempfile, limited: true).run!
+
+    redirect_to @race, notice: 'Tracks successfully imported'
   end
 
   def import_tracks
