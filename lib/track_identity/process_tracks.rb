@@ -1,7 +1,7 @@
 module TrackIdentity::ProcessTracks
   module_function
 
-  def run(force: false, tracks = Track.limited)
+  def run(tracks = Track.limited, force: false)
     unless force || TrackIdentity.current_data_stale?
       puts("Track identities up to date, skipping")
       return
