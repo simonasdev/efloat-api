@@ -37,12 +37,12 @@ namespace :devices do
 
     Device.transaction do
       data.each_with_index do |arr, index|
-        d = Device.find_by(index: arr[1])
+        d = Device.find_by(index: arr[5].presence || arr[1])
 
         d.update!(
           kind: arr[0],
           name: arr[2],
-          position: arr[5].presence || arr[1],
+          position: arr[1],
           crew_data: {
             car: arr[3],
             country: arr[4]
