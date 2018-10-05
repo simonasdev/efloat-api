@@ -13,7 +13,10 @@ Rails.application.routes.draw do
   resources :users
 
   resources :devices do
-    get :connected, on: :collection
+    collection do
+      get :connected
+      post :mass_command
+    end
     member do
       post :command
       get :data_lines

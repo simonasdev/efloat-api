@@ -1,5 +1,5 @@
 class DevicesController < ApplicationController
-  before_action :set_device, only: %i[show edit update destroy command reset data_lines]
+  before_action :set_device, only: %i[show edit update destroy command data_lines]
 
   skip_before_action :authenticate_user!, only: %i(index), if: :json_request?
 
@@ -59,10 +59,16 @@ class DevicesController < ApplicationController
     end
   end
 
-  def reset
-    @device.reset! unless @device.unregistered?
+  def mass_command
+    command = params[:value]
 
-    redirect_back(fallback_location: root_path, notice: 'Reset successful')
+    Device.all.each do |device|
+      CommandService.new(device, command).send!
+    end
+
+    @notice = "Command sent to all devices: #{ command }"
+
+    redirect_back(fallback_location: devices_path, notice: @notice)
   end
 
   def data_lines

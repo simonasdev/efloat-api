@@ -17,6 +17,15 @@
           = f.search_field :position_eq, placeholder: 'Position', class: 'form-control'
         input.hidden type="submit" tabindex="-1"
 hr
+  .row
+    .col-xs-12
+      = form_tag mass_command_devices_path do
+        .row
+          .col-md-2
+            = select_tag :value, options_for_select(CommandService::COMMANDS), class: 'form-control'
+          .col-md-3
+            = submit_tag 'Send command to all devices', class: 'btn btn-warning', data: { confirm: 'Are you sure?' }
+hr
 .table-responsive
   table.table.table-striped.table-bordered.table-hover
     thead
