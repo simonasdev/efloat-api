@@ -2,11 +2,13 @@
 @import "bootstrap-datetimepicker";
 @import "leaflet";
 
+$header-height: $navbar-height + 1;
+
 @import "forms";
 @import "map";
 
 body {
-  padding-top: $navbar-height;
+  padding-top: $header-height;
 }
 
 .navbar {

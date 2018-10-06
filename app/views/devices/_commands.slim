@@ -41,6 +41,11 @@
   = link_to 'Disable', device_path(device, { device: { state: :disabled } }), method: :patch, remote: remote, class: 'btn btn-danger'
 
 .links
+  = link_to edit_device_path(@device), class: 'btn btn-primary' do
+    span.glyphicon.glyphicon-pencil
+    |  Edit
+
+.links
   = form_for(device, remote: true, html: { class: "form-horizontal", role: "form" }) do |f|
     .form-group
       .col-xs-12
