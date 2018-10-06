@@ -20,6 +20,7 @@
 //= require moment/lt
 //= require bootstrap-datetimepicker
 //= require leaflet
+//= require iso8601-js-period
 //= require leaflet-timedimension
 //= require_tree .
 

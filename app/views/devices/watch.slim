@@ -3,8 +3,12 @@
 .container
   .row
     .col-xs-12
-      h1= @race.title
+      h1
+        = @race.title
+        .btn.btn-success.pull-right#refresh-data
+          span.glyphicon.glyphicon-refresh
+          |  Refresh
       hr
 
 .map-container
-  #timeline-map data-tracks=(@race.tracks.map { |track| track.slice(:route, :id, :name, :length_in_km, :kind, :speed_limit) }.to_json)
+  #timeline-map data-url=(device_data_lines_path(@device, race_id: @race.id)) data-tracks=(@race.tracks.map { |track| track.slice(:route, :id, :name, :length_in_km, :kind, :speed_limit) }.to_json)
