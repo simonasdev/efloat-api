@@ -16,6 +16,7 @@ Rails.application.routes.draw do
     collection do
       get :connected
       post :mass_command
+      post :import
     end
     member do
       post :command

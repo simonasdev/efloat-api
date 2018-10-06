@@ -2,6 +2,7 @@
   = link_to new_device_path, class: 'btn btn-primary' do
     span.glyphicon.glyphicon-plus
     |  New Device
+  = import_button 'Import devices', import_devices_path, :csv
   h1
     | Listing devices
 

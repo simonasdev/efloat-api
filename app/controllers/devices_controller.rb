@@ -66,9 +66,7 @@ class DevicesController < ApplicationController
       CommandService.new(device, command).send!
     end
 
-    @notice = "Command sent to all devices: #{ command }"
-
-    redirect_back(fallback_location: devices_path, notice: @notice)
+    redirect_back(fallback_location: devices_path, notice: "Command sent to all devices: #{ command }")
   end
 
   def data_lines
@@ -77,6 +75,12 @@ class DevicesController < ApplicationController
 
   def connected
     render partial: 'connected_devices', locals: { devices: Device.connected }
+  end
+
+  def import
+    Import::Devices.new(params[:file].tempfile).run!
+
+    redirect_back(fallback_location: devices_path, notice: 'Device data successfuly imported')
   end
 
   private

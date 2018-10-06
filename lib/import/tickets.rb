@@ -21,9 +21,7 @@ module Import
       end
 
       Ticket.transaction do
-        tickets.each do |ticket|
-          Ticket.find_or_create_by!(ticket)
-        end
+        tickets.each(&Ticket.method(:find_or_create_by!))
       end
     end
 

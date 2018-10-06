@@ -41,7 +41,7 @@ class Device < ApplicationRecord
   def self.connected
     numbers = $redis.get('devices:connected')
 
-    numbers ? where(number: JSON.parse(numbers)).order('index::integer') : none
+    numbers ? where(number: JSON.parse(numbers)).order(Arel.sql('index::integer')) : none
   end
 
   private

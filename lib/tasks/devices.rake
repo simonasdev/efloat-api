@@ -33,23 +33,7 @@ namespace :devices do
 
   desc 'Populate'
   task populate: :environment do
-    data = CSV.read('drivers.csv')
-
-    Device.transaction do
-      data.each do |arr|
-        d = Device.find_by(index: arr[5].presence || arr[1])
-
-        d.update!(
-          kind: arr[0],
-          name: arr[2],
-          position: arr[1],
-          crew_data: {
-            car: arr[3],
-            country: arr[4]
-          }
-        ) if d
-      end
-    end
+    Import::Devices.new(File.open('drivers.csv')).run!
   end
 
   desc 'Calibrate devices'
