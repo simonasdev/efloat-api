@@ -11,9 +11,12 @@
         - @device.errors.full_messages.each do |msg|
           li= msg
   .form-group
-    = f.label :number, class: "col-sm-2 control-label"
+    label.control-label.col-sm-2 Identifier
     .col-sm-10
-      = f.telephone_field :number, class: "form-control"
+      .input-group
+        span class="input-group-addon"
+          span= f.object.index
+        = f.text_field :number, class: "form-control", disabled: true
   .form-group
     = f.label :name, class: "col-sm-2 control-label"
     .col-sm-10
