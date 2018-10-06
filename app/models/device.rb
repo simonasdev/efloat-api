@@ -33,6 +33,11 @@ class Device < ApplicationRecord
   scope :by_kind, ->(*_kinds) { where(kind: _kinds) }
 
   after_commit :notify_changes, on: :update, if: -> { saved_changes.values_at(*NOTIFIABLE_ATTRIBUTES).any?(&:present?) }
+  before_save :set_comment_presence
+
+  def races
+    Race.where(id: data_lines.select(:race_id))
+  end
 
   def offline?
     !online
@@ -48,5 +53,9 @@ class Device < ApplicationRecord
 
   def notify_changes
     $redis.publish CHANNEL, DeviceSerializer.new(self).to_json
+  end
+
+  def set_comment_presence
+    self.comment = comment.presence
   end
 end

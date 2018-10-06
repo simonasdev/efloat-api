@@ -1,3 +1,18 @@
+function initializeTimelineMap() {
+  var $map = $('#timeline-map');
+
+  if ($map.length) {
+    var map = L.map(
+      $map.attr('id'),
+      _.assign({}, defaultMapOptions(), {
+
+      })
+    );
+
+    addTracksToMap($map.data('tracks'), map);
+  }
+}
+
 function initializeConnectedDevices () {
   var interval;
 

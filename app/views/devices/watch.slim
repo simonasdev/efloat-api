@@ -1,0 +1,10 @@
+- content_for :container_class, 'watch-container'
+
+.container
+  .row
+    .col-xs-12
+      h1= @race.title
+      hr
+
+.map-container
+  #timeline-map data-tracks=(@race.tracks.map { |track| track.slice(:route, :id, :name, :length_in_km, :kind, :speed_limit) }.to_json)

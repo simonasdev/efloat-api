@@ -2,6 +2,11 @@
   height: 600px;
 }
 
+#timeline-map {
+  flex: 1;
+  align-self: stretch;
+}
+
 .absolute-tooltip {
   position: absolute;
 }

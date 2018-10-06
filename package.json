@@ -2,6 +2,7 @@
   "name": "efloat-api",
   "private": true,
   "dependencies": {
-    "leaflet-geometryutil": "^0.8.1"
+    "leaflet-geometryutil": "^0.8.1",
+    "leaflet-timedimension": "^1.1.0"
   }
 }

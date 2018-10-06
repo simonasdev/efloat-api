@@ -20,11 +20,13 @@
 //= require moment/lt
 //= require bootstrap-datetimepicker
 //= require leaflet
+//= require leaflet-timedimension
 //= require_tree .
 
 $(document).on('turbolinks:load', function () {
   setActiveModule();
   initializeMap();
+  initializeTimelineMap();
   initializeConnectedDevices();
 
   $('.datetimepicker').datetimepicker();
@@ -53,15 +55,4 @@ function toggleFeedback (id, reset) {
     feedbackItems.addClass('hidden');
     feedbackItems.filter('#' + id).removeClass('hidden');
   })
-}
-
-function isPointOnLine (point, path) {
-  var latitude, longitude;
-
-  for (var i = 0; i < path.length - 1; i++) {
-    if (L.GeometryUtil.belongsSegment(point, path[i], path[i + 1])) {
-      return true;
-    }
-  }
-  return false;
 }

@@ -20,8 +20,10 @@ Rails.application.routes.draw do
     end
     member do
       post :command
-      get :data_lines
+      get :watch, as: :watch_race
     end
+
+    resources :data_lines, only: :index
   end
 
   resources :races do

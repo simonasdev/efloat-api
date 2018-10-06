@@ -7,6 +7,15 @@
     |  Edit
   h1
     | Show device
+.row
+  .col-xs-12
+    = form_tag watch_race_device_path(@device), method: :get do
+      .row
+        .col-md-3
+          = select_tag :race_id, options_for_select(@device.races.ordered.map { |race| [race.title, race.id] }), class: 'form-control'
+        .col-md-3
+          = submit_tag 'Watch timeline', class: 'btn btn-success'
+hr
 dl.dl-horizontal
   dt
     | Number:
@@ -24,11 +33,11 @@ dl.dl-horizontal
     | Kind:
   dd
     = @device.kind
-  dt Current data:
-  dd
-    pre= JSON.pretty_generate(@device.current_data_line&.attributes&.except('id', 'created_at', 'updated_at', 'device_id'))
   dt Crew data:
   dd
     pre= JSON.pretty_generate(@device.crew_data)
+  dt Current data:
+  dd
+    pre= JSON.pretty_generate(@device.current_data_line&.attributes&.except('id', 'created_at', 'updated_at', 'device_id'))
   dt Commands:
   dd= render 'commands', device: @device

@@ -1,0 +1,2 @@
+- tracks.each do |track|
+  i.absolute-tooltip data-toggle="tooltip" data-placement="right" data-trigger="manual" data-title="#{track.name}, #{track.kind}<br>Length: #{track.length_in_km}#{'<br>Speed limit: ' + track.speed_limit.to_s + 'km/h' if track.limited?}" data-id=track.id data-container='#map' data-html="true"

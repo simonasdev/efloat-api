@@ -1,5 +1,5 @@
 class DevicesController < ApplicationController
-  before_action :set_device, only: %i[show edit update destroy command data_lines]
+  before_action :set_device, only: %i[show edit update destroy command watch]
 
   skip_before_action :authenticate_user!, only: %i(index), if: :json_request?
 
@@ -69,10 +69,6 @@ class DevicesController < ApplicationController
     redirect_back(fallback_location: devices_path, notice: "Command sent to all devices: #{ command }")
   end
 
-  def data_lines
-    render json: BasicDataLineSerializer.new(@device.data_lines)
-  end
-
   def connected
     render partial: 'connected_devices', locals: { devices: Device.connected }
   end
@@ -81,6 +77,10 @@ class DevicesController < ApplicationController
     Import::Devices.new(params[:file].tempfile).run!
 
     redirect_back(fallback_location: devices_path, notice: 'Device data successfuly imported')
+  end
+
+  def watch
+    @race = Race.find(params[:race_id])
   end
 
   private
