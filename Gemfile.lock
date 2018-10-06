@@ -133,6 +133,9 @@ GEM
       warden (~> 1.2.3)
     domain_name (0.5.20180417)
       unf (>= 0.0.5, < 1.0.0)
+    dotiw (4.0.1)
+      actionpack (>= 4)
+      i18n
     erubi (1.7.1)
     execjs (2.7.0)
     fast_jsonapi (1.2)
@@ -356,6 +359,7 @@ DEPENDENCIES
   chromedriver-helper
   coffee-rails (~> 4.2)
   devise
+  dotiw
   fast_jsonapi
   geo_coord
   googlemaps-services
