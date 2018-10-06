@@ -15,18 +15,12 @@
   h1
     | Show race
 dl.dl-horizontal
-  dt
-    | Title:
-  dd
-    = @race.title
-  dt
-    | Start time:
-  dd
-    = @race.start_time
-  dt
-    | End time:
-  dd
-    = @race.end_time
+  dt Title:
+  dd= @race.title
+  dt Start time:
+  dd= @race.start_time
+  dt End time:
+  dd= @race.end_time
   hr
   dt
   dd
