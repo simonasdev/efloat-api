@@ -56,7 +56,7 @@ function replaceDataLinesForMap(url, map) {
         speed: speeds
       }
     });
-    console.log({ coordinates, times, speeds })
+
     L.timeDimension.layer.geoJson(layer, {
       addlastPoint: true,
       updateTimeDimension: true,
