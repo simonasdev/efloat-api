@@ -17,17 +17,15 @@ function initializeTimelineMap() {
 }
 
 function initializeConnectedDevices () {
-  var interval;
-
   if ($('#connected-devices').length) {
-    interval = window.setInterval(function () {
+    window.connectedDevicesInterval = window.setInterval(function () {
       $.get('/devices/connected', function (response) {
         $('#connected-devices').html(response);
       });
     }, 2000);
-  } else if (interval) {
-    window.clearInterval(interval);
-    interval = null;
+  } else if (window.connectedDevicesInterval) {
+    window.clearInterval(window.connectedDevicesInterval);
+    window.connectedDevicesInterval = null;
   }
 }
 
