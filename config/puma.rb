@@ -13,6 +13,7 @@ port        ENV.fetch("PORT") { 3000 }
 
 # Specifies the `environment` that Puma will run in.
 #
+p "#{ENV}"
 p "RENV #{ENV["RAILS_ENV"]}"
 environment ENV.fetch("RAILS_ENV") { "development" }
 
