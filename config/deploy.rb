@@ -4,13 +4,13 @@ lock "~> 3.10.2"
 
 set :application, "efloat-api"
 set :repo_url, "git@github.com:simonasdev/efloat-api.git"
-set :deploy_to, "/home/efloat/efloat-api"
+set :deploy_to, "/home/rails/efloat-api"
 
 append :rvm_map_bins, 'rails', 'sidekiq'
 set :nvm_map_bins, %w{node npm yarn}
-set :nvm_node, 'v10.3.0'
+set :nvm_node, 'v10.15.3'
 
-append :linked_files, "config/master.key", 'config/puma.rb'
+append :linked_files, 'config/puma.rb'
 append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/system"
 
 set :db_local_clean, true
@@ -21,7 +21,7 @@ namespace :puma do
   desc 'Restart puma'
   task :restart do
     on roles(:app) do
-      execute 'systemctl --user restart puma'
+      execute 'sudo systemctl restart rails.service'
     end
   end
 end
@@ -41,5 +41,5 @@ end
 
 namespace :deploy do
   after 'deploy:finished', 'track_identity:check'
-  after 'deploy:finished', 'puma:restart'
+  # after 'deploy:finished', 'puma:restart'
 end
