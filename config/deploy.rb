@@ -15,9 +15,6 @@ append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/syst
 
 set :db_local_clean, true
 
-set :init_system, :systemd
-set :service_unit_name, 'sidekiq.service'
-
 set :rails_env, 'production'
 
 namespace :puma do
@@ -42,7 +39,25 @@ namespace :track_identity do
   end
 end
 
+namespace :sidekiq do
+  desc 'Stop sidekiq'
+  task :stop do
+    on roles(:app) do
+      execute 'sudo systemctl stop sidekiq.service'
+    end
+  end
+
+  desc 'Restart sidekiq'
+  task :restart do
+    on roles(:app) do
+      execute 'sudo systemctl start sidekiq.service'
+    end
+  end
+end
+
 namespace :deploy do
+  # before 'deploy:started', 'sidekiq:stop'
   after 'deploy:finished', 'track_identity:check'
   # after 'deploy:finished', 'puma:restart'
+  # after 'deploy:finished', 'sidekiq:restart'
 end

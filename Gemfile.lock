@@ -98,9 +98,6 @@ GEM
     capistrano-rvm (0.1.2)
       capistrano (~> 3.0)
       sshkit (~> 1.2)
-    capistrano-sidekiq (1.0.2)
-      capistrano (>= 3.9.0)
-      sidekiq (>= 3.4)
     capistrano-yarn (2.0.2)
       capistrano (~> 3.0)
     capybara (3.1.0)
@@ -353,7 +350,6 @@ DEPENDENCIES
   capistrano-nvm
   capistrano-rails
   capistrano-rvm
-  capistrano-sidekiq
   capistrano-yarn
   capybara (>= 2.15, < 4.0)
   chromedriver-helper
@@ -395,4 +391,4 @@ RUBY VERSION
    ruby 2.5.1p57
 
 BUNDLED WITH
-   1.16.2
+   1.17.1

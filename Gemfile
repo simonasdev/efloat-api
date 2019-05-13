@@ -61,7 +61,6 @@ group :development do
   gem 'capistrano-rvm'
   gem 'capistrano-bundler'
   gem 'capistrano-db-tasks', require: false
-  gem 'capistrano-sidekiq'
   gem 'capistrano-yarn'
   gem 'capistrano-nvm', require: false
 end
