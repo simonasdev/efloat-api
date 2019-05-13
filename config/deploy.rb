@@ -16,6 +16,9 @@ append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/syst
 set :db_local_clean, true
 
 set :init_system, :systemd
+set :service_unit_name, 'sidekiq.service'
+
+set :rails_env, 'production'
 
 namespace :puma do
   desc 'Restart puma'
