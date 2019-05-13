@@ -56,8 +56,8 @@ namespace :sidekiq do
 end
 
 namespace :deploy do
-  # before 'deploy:started', 'sidekiq:stop'
+  before 'deploy:started', 'sidekiq:stop'
   after 'deploy:finished', 'track_identity:check'
-  # after 'deploy:finished', 'puma:restart'
-  # after 'deploy:finished', 'sidekiq:restart'
+  after 'deploy:finished', 'puma:restart'
+  after 'deploy:finished', 'sidekiq:restart'
 end
