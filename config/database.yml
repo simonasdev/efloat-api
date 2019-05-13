@@ -81,5 +81,6 @@ test:
 production:
   <<: *default
   database: efloat-api_production
-  username: efloat
+  username: <%= ENV['PG_USER'] %>
+  password: <%= ENV['PG_PASSWORD'] %>
   pool: 75
