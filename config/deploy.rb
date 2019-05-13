@@ -10,7 +10,6 @@ append :rvm_map_bins, 'rails', 'sidekiq'
 set :nvm_map_bins, %w{node npm yarn}
 set :nvm_node, 'v10.15.3'
 
-append :linked_files, 'config/puma.rb'
 append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/system"
 
 set :db_local_clean, true
