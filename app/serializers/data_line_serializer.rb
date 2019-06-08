@@ -14,7 +14,7 @@ class DataLineSerializer
              :orientation
 
   attribute :timestamp do |object|
-    object.timestamp.strftime("%Y-%d-%m %H:%M")
+    object.timestamp.strftime("%Y-%m-%d %H:%M")
   end
 
   attribute :battery do |object|
