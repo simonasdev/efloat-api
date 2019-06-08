@@ -39,6 +39,7 @@
   = link_to 'Hide', device_path(device, { device: { state: :hidden } }), method: :patch, remote: remote, class: 'btn btn-warning'
   = link_to 'Enable', device_path(device, { device: { state: :enabled } }), method: :patch, remote: remote, class: 'btn btn-success'
   = link_to 'Disable', device_path(device, { device: { state: :disabled } }), method: :patch, remote: remote, class: 'btn btn-danger'
+  = link_to 'Technical problems', device_path(device, { device: { state: :technical } }), method: :patch, remote: remote, class: 'btn btn-danger'
 
 .links
   = link_to edit_device_path(@device), class: 'btn btn-primary' do
