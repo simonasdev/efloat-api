@@ -22,8 +22,10 @@ module Import
 
           values = row.cells.map { |cell| cell && cell.value }
 
+          next if values.empty?
+
           parse_coords = -> value do
-            coords = value.split(',').map { |c| c.split('.', 3) }
+            coords = value.to_s.strip.chomp(',').squeeze(', ').gsub(', ', ',').split(',').map { |c| c.split('.', 3) }
 
             if coords.first.size === 3 && coords.last.size === 3
               Geo::Coord.new(GEO_ATTRS.zip(coords.flatten.map(&:to_i)).to_h).to_s(dms: false)
@@ -33,8 +35,8 @@ module Import
           end
 
           values.map.with_index do |value, i|
-            if i == 1 && value.present?
-              parse_coords.call value.to_s
+            if i == 2 && value.present?
+              parse_coords.call value
             else
               value
             end
