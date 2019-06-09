@@ -40,7 +40,7 @@ function replaceDataLinesForMap(url, map) {
     for (var i = 0, len = data.length; i < len; i++) {
       attributes = data[i].attributes;
 
-      coordinates.push([attributes.latitude, attributes.longitude]);
+      coordinates.push([attributes.longitude, attributes.latitude]);
       times.push(attributes.timestamp);
       speeds.push(attributes.speed);
     }
@@ -52,8 +52,12 @@ function replaceDataLinesForMap(url, map) {
         "coordinates": coordinates
       },
       "properties": {
-        "time": times,
+        "times": times,
         speed: speeds
+      }
+    }, {
+      pointToLayer: function (feature, latLng) {
+        return L.circleMarker(latLng);
       }
     });
 
