@@ -31,12 +31,12 @@ module Import
 
         values = values.map.with_index do |value, i|
           if i < 3 && value.present?
-            formatted_value = value.to_s.strip.chomp(',').squeeze(', ').gsub(', ', "\n").gsub(' ', ',')
+            formatted_value = value.to_s.strip.chomp(',').squeeze(', ')
 
             if i == 1
-              formatted_value.split("\n").map(&method(:parse_coords)).join("\n")
+              formatted_value.gsub(', ', "\n").gsub(' ', ',').split("\n").map(&method(:parse_coords)).join("\n")
             else
-              parse_coords(formatted_value)
+              parse_coords(formatted_value.gsub(', ', ',').gsub(' ', ','))
             end
           else
             value
