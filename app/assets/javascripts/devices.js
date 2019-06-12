@@ -30,7 +30,9 @@ function initializeConnectedDevices () {
 }
 
 function replaceDataLinesForMap(url, map) {
-  return $.get(url, function (response) {
+  var params = '&timestamp_from=' + $('#timestamp_from').val() + '&timestamp_until=' + $('#timestamp_until').val()
+
+  return $.get(url + params, function (response) {
     var coordinates = [],
         times = [],
         speeds = [],
@@ -45,6 +47,8 @@ function replaceDataLinesForMap(url, map) {
       speeds.push(attributes.speed);
     }
 
+    var marker;
+
     var layer = L.geoJSON({
       "type": "Feature",
       "geometry": {
@@ -57,14 +61,26 @@ function replaceDataLinesForMap(url, map) {
       }
     }, {
       pointToLayer: function (feature, latLng) {
-        return L.circleMarker(latLng);
+        if (marker) {
+          marker.setLatLng(latLng)
+        } else {
+          marker = L.marker(latLng)
+        }
+
+        return marker;
+      },
+      onEachFeature: function (feature, layer) {
+        var speed = feature.properties.speed[timeDimension && timeDimension._map.timeDimension._currentTimeIndex || 0]
+
+        layer.bindPopup(speed + ' km/h');
       }
     });
 
-    L.timeDimension.layer.geoJson(layer, {
-      addlastPoint: true,
+    var timeDimension = L.timeDimension.layer.geoJson(layer, {
       updateTimeDimension: true,
       updateTimeDimensionMode: 'replace',
-    }).addTo(map);
+    });
+
+    timeDimension.addTo(map);
   });
 }

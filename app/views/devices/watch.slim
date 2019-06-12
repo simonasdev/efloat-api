@@ -3,12 +3,26 @@
 .container
   .row
     .col-xs-12
-      h1
-        = @race.title
-        .btn.btn-success.pull-right#refresh-data
-          span.glyphicon.glyphicon-refresh
-          |  Refresh
-      hr
+      h1= "#{@race.title}, #{@device.name}"
+  .row
+    .col-xs-5
+      .form-group
+        label
+          .input-group
+            span class="input-group-addon"
+              span class="glyphicon glyphicon-calendar"
+            = text_field_tag :timestamp_from, 10.minutes.ago, placeholder: 'Time from', class: 'form-control datetimepicker'
+    .col-xs-5
+      .form-group
+        label
+          .input-group
+            span class="input-group-addon"
+              span class="glyphicon glyphicon-calendar"
+            = text_field_tag :timestamp_until, Time.current, placeholder: 'Time until', class: 'form-control datetimepicker'
+    .col-xs-2
+      #refresh-data.btn.btn-success
+        span.glyphicon.glyphicon-refresh
+        |  Refresh
 
 .map-container
   #timeline-map data-url=(device_data_lines_path(@device, race_id: @race.id)) data-tracks=(@race.tracks.map { |track| track.slice(:route, :id, :name, :length_in_km, :kind, :speed_limit) }.to_json)
