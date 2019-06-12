@@ -24,7 +24,5 @@ module Import
         end
       end
     end
-
-
   end
 end
