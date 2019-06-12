@@ -34,7 +34,7 @@ module Import
             end
           end
 
-          values.map.with_index do |value, i|
+          values = values.map.with_index do |value, i|
             if i == 2 && value.present?
               parse_coords.call value
             else
