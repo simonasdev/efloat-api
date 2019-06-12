@@ -36,7 +36,7 @@ module Import
 
           values = values.map.with_index do |value, i|
             if i == 2 && value.present?
-              parse_coords.call value
+              parse_coords.call(value.gsub(', ', ',').gsub(' ', ','))
             else
               value
             end
