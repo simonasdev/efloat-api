@@ -17,7 +17,7 @@
   /   |  Stop
 
 .links
-  = link_to command_device_path(device, value: 'check,on'), class: 'btn btn-success', method: :post, remote: remote do
+  = link_to command_device_path(device, value: 'check,on'), class: 'btn btn-success', method: :post, remote: remote, data: { confirm: 'Are you sure?' } do
     span.glyphicon.glyphicon-ok-sign
     |  Check on
   = link_to command_device_path(device, value: 'check,off'), class: 'btn btn-danger', method: :post, remote: remote do

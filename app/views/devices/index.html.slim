@@ -27,6 +27,15 @@ hr
           .col-md-3
             = submit_tag 'Send command to all devices', class: 'btn btn-warning', data: { confirm: 'Are you sure?' }
 hr
+  .row
+    .col-xs-12
+      = form_tag mass_state_change_devices_path do
+        .row
+          .col-md-2
+            = select_tag :value, options_for_select(Device.aasm.states.map(&:name)), class: 'form-control'
+          .col-md-3
+            = submit_tag 'Change state of all devices', class: 'btn btn-warning', data: { confirm: 'Are you sure?' }
+hr
 .table-responsive
   table.table.table-striped.table-bordered.table-hover
     thead

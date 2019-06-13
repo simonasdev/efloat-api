@@ -69,6 +69,14 @@ class DevicesController < ApplicationController
     redirect_back(fallback_location: devices_path, notice: "Command sent to all devices: #{ command }")
   end
 
+  def mass_state_change
+    state = params[:value]
+
+    Device.update_all state: state
+
+    redirect_back(fallback_location: devices_path, notice: "State changed of all devices to #{ state }")
+  end
+
   def connected
     render partial: 'connected_devices', locals: { devices: Device.connected }
   end

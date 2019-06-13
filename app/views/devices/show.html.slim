@@ -33,6 +33,10 @@ dl.dl-horizontal
     | Kind:
   dd
     = @device.kind
+  dt
+    | State:
+  dd
+    = @device.state
   dt Crew data:
   dd
     pre= JSON.pretty_generate(@device.crew_data)
