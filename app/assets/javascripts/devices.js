@@ -72,7 +72,7 @@ function replaceDataLinesForMap(url, map) {
       onEachFeature: function (feature, layer) {
         var speed = feature.properties.speed[timeDimension && timeDimension._map.timeDimension._currentTimeIndex || 0];
 
-        layer.bindPopup(speed + ' km/h');
+        layer.bindTooltip(Math.round(speed) + ' km/h', { permanent: true });
       }
     });
 
