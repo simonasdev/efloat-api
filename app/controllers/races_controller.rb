@@ -65,12 +65,12 @@ class RacesController < ApplicationController
   end
 
   def speed_report
-    SpeedExceed::ProcessRace.run(@race) unless @race.speed_exceed_processed?
+    SpeedExceed::ProcessRace.run(@race)
 
     if speed_report_params.values.all?(&:present?)
       timestamp_from, timestamp_until, speed, time = speed_report_params.values
 
-      response.headers['Content-Disposition'] = "inline; filename=#{@race.title} report #{time}-#{speed}.xlsx"
+      response.headers['Content-Disposition'] = "inline; filename=#{@race.title} report #{speed}km/h-#{time}s.xlsx"
 
       @events = @race.speed_exceed_events
                      .with_lines_by_range(timestamp_from, timestamp_until)
