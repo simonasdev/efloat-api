@@ -5,7 +5,7 @@ namespace :track_identity do
 
   task fill_data_lines: :environment do
     race = Race.last
-    race.data_lines.where('timestamp > ?', Date.today.beginning_of_day.advance(hours: 8)).preload(:device).find_each do |dataline|
+    race.data_lines.where('timestamp > ?', Date.today.beginning_of_day.advance(hours: 10)).preload(:device).find_each do |dataline|
       point = TrackIdentity::CoordToMetersMercator.get(dataline.latitude, dataline.longitude)
 
       if track = Point.find_by([:x, :y].zip(point).to_h)&.track

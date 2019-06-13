@@ -73,7 +73,7 @@ class RacesController < ApplicationController
       response.headers['Content-Disposition'] = "inline; filename=#{@race.title} report #{speed}km/h-#{time}s.xlsx"
 
       @events = @race.speed_exceed_events
-                     .with_lines_by_range(timestamp_from, timestamp_until)
+                     .with_lines_by_range(Time.zone.parse(timestamp_from), Time.zone.parse(timestamp_until))
                      .where('average_speed >= ? AND seconds >= ?', speed, time)
                      .preload(:device, :track)
     else
