@@ -74,7 +74,7 @@ class RacesController < ApplicationController
 
       @events = @race.speed_exceed_events
                      .with_lines_by_range(Time.zone.parse(timestamp_from), Time.zone.parse(timestamp_until))
-                     .where('average_speed >= ? AND seconds >= ?', speed, time)
+                     .where('average_speed >= ? AND seconds >= ? AND average_speed < ?', speed, time, 100)
                      .preload(:device, :track)
     else
       flash[:error] = 'Fill all inputs'
