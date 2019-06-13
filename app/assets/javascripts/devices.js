@@ -30,6 +30,16 @@ function initializeConnectedDevices () {
 }
 
 function replaceDataLinesForMap(url, map) {
+  var redIcon = new L.Icon({
+    iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png',
+    shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+    iconSize: [25, 40],
+    iconAnchor: [12, 40],
+    popupAnchor: [1, -20],
+    tooltipAnchor: [12, -20],
+    shadowSize: [40, 40]
+  });
+
   var params = '&timestamp_from=' + $('#timestamp_from').val() + '&timestamp_until=' + $('#timestamp_until').val()
 
   return $.get(url + params, function (response) {
@@ -64,7 +74,7 @@ function replaceDataLinesForMap(url, map) {
         if (marker) {
           marker.setLatLng(latLng)
         } else {
-          marker = L.marker(latLng)
+          marker = L.marker(latLng, { icon: redIcon })
         }
 
         return marker;
