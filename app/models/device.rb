@@ -29,7 +29,8 @@ class Device < ApplicationRecord
   scope :ordered, -> {
     order(Arel.sql(%q(
       CASE WHEN left(devices.position, 1) = '0' THEN 1 ELSE 0 END ASC,
-      CASE WHEN devices.position ~ '^\d+$' THEN devices.position::integer ELSE NULL END ASC NULLS LAST
+      CASE WHEN devices.position ~ '^\d+$' THEN devices.position::integer ELSE 99999 END ASC NULLS LAST,
+      devices.position::bytea
     )))
   }
 
