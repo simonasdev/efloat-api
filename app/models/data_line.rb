@@ -1,5 +1,5 @@
 class DataLine < ApplicationRecord
-  BATTERY_VOLTAGES = (3.15..4.2)
+  BATTERY_VOLTAGES = (3..4.2)
 
   belongs_to :device, touch: true
   belongs_to :race, optional: true

@@ -25,7 +25,7 @@ class SpeedExceed::Compact
   def exceeded_datalines
     @exceeded_datalines ||= SpeedExceedDataLine
       .where(race: race, limited_track: track, device: device)
-      .where('speed_exceeded > 0')
+      .where('speed_exceeded BETWEEN ? AND ?', 0, 100)
       .order(timestamp: :asc).to_a
   end
 
