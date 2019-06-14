@@ -5,7 +5,7 @@ module DevicesHelper
         i.zero? ? DateTime.strptime(d, '%s').in_time_zone : d
       end.join(',')
 
-      %Q(#{device.number} - #{device.index}, #{data_line})
+      %Q(#{device.position} - #{device.index}, #{data_line})
     end.join("\n")
   end
 end

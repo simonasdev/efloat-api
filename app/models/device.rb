@@ -21,17 +21,17 @@ class Device < ApplicationRecord
   has_many :speed_exceed_data_lines
   belongs_to :current_data_line, class_name: 'DataLine', optional: true
 
-  scope :listing, -> {
-    order(Arel.sql(%q(
-      CASE WHEN left(devices.position, 1) = '0' THEN 1 ELSE 0 END ASC,
-      CASE WHEN devices.position ~ '^\d+$' THEN devices.position::integer ELSE NULL END ASC NULLS LAST
-    ))).preload(:current_data_line)
-  }
+  scope :listing, -> { ordered.preload(:current_data_line) }
   scope :not_disabled, -> { where.not(state: :disabled) }
   scope :online, -> { where(online: true) }
   scope :offline, -> { where(online: false) }
   scope :by_kind, ->(*_kinds) { where(kind: _kinds) }
-  scope :ordered, -> { order(Arel.sql('index::integer')) }
+  scope :ordered, -> {
+    order(Arel.sql(%q(
+      CASE WHEN left(devices.position, 1) = '0' THEN 1 ELSE 0 END ASC,
+      CASE WHEN devices.position ~ '^\d+$' THEN devices.position::integer ELSE NULL END ASC NULLS LAST
+    )))
+  }
 
   after_commit :notify_changes, on: :update, if: -> { saved_changes.values_at(*NOTIFIABLE_ATTRIBUTES).any?(&:present?) }
   before_save :set_comment_presence
