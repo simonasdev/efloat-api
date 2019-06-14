@@ -60,9 +60,9 @@ hr
             br
             = link_to 'Edit', edit_device_path(device)
           td
-            - if device.enabled?
+            - unless device.disabled?
               = link_to 'Disable', device_path(device, { device: { state: :disabled } }), method: :patch, class: 'btn btn-danger'
-            - elsif device.disabled?
+            - unless device.enabled?
               = link_to 'Enable', device_path(device, { device: { state: :enabled } }), method: :patch, class: 'btn btn-success'
 
 #connected-devices
