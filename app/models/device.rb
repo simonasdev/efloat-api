@@ -31,6 +31,7 @@ class Device < ApplicationRecord
   scope :online, -> { where(online: true) }
   scope :offline, -> { where(online: false) }
   scope :by_kind, ->(*_kinds) { where(kind: _kinds) }
+  scope :ordered, -> { order(Arel.sql('index::integer')) }
 
   after_commit :notify_changes, on: :update, if: -> { saved_changes.values_at(*NOTIFIABLE_ATTRIBUTES).any?(&:present?) }
   before_save :set_comment_presence
@@ -46,7 +47,7 @@ class Device < ApplicationRecord
   def self.connected
     numbers = $redis.get('devices:connected')
 
-    numbers ? where(number: JSON.parse(numbers)).order(Arel.sql('index::integer')) : none
+    numbers ? where(number: JSON.parse(numbers)).ordered : none
   end
 
   private

@@ -4,7 +4,7 @@ pre
 
 hr
 
-- disconnected_devices = Device.enabled.where.not(id: devices)
+- disconnected_devices = Device.enabled.where.not(id: devices).ordered
 h2 Enabled disconnected devices (#{disconnected_devices.size})
 pre
-  = disconnected_devices.map { |device| %Q(#{device.number} - #{device.index}, #{$redis.get("data_lines:#{device.id}")}) }.join("\n")
+  = render_disconnected_devices(disconnected_devices)
