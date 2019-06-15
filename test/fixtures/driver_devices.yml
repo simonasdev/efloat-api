@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  driver: one
+  device: one
+  race: one
+  position: MyText
+  state: MyText
+  comment: MyText
+
+two:
+  driver: two
+  device: two
+  race: two
+  position: MyText
+  state: MyText
+  comment: MyText

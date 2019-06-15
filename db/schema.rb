@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_15_120945) do
+ActiveRecord::Schema.define(version: 2019_06_15_132907) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -57,6 +57,22 @@ ActiveRecord::Schema.define(version: 2019_06_15_120945) do
     t.index ["kind"], name: "index_devices_on_kind"
     t.index ["position"], name: "index_devices_on_position"
     t.index ["state"], name: "index_devices_on_state"
+  end
+
+  create_table "driver_devices", force: :cascade do |t|
+    t.bigint "driver_id"
+    t.bigint "device_id"
+    t.bigint "race_id"
+    t.text "position"
+    t.text "state"
+    t.text "comment"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["device_id"], name: "index_driver_devices_on_device_id"
+    t.index ["driver_id"], name: "index_driver_devices_on_driver_id"
+    t.index ["position"], name: "index_driver_devices_on_position"
+    t.index ["race_id"], name: "index_driver_devices_on_race_id"
+    t.index ["state"], name: "index_driver_devices_on_state"
   end
 
   create_table "drivers", force: :cascade do |t|
