@@ -40,7 +40,7 @@ function defaultMapOptions() {
   };
 }
 
-function getTrackColor (kind) {
+function getTrackColor(kind) {
   switch (kind) {
     case 'speed':
       return 'red';
