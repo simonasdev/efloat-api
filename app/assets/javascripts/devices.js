@@ -5,10 +5,18 @@ function initializeTimelineMap() {
     var map = L.map(
       $map.attr('id'),
       _.assign({}, defaultMapOptions(), {
-        timeDimension: true,
-        timeDimensionControl: true,
+        timeDimension: true
       })
     );
+
+    var timeDimensionControl = new L.Control.TimeDimension({
+      minSpeed: 1,
+      speedStep: 1,
+      maxSpeed: 20,
+      playReverseButton: true
+    });
+    map.addControl(timeDimensionControl);
+    timeDimensionControl._toggleDateUTC();
 
     addTracksToMap($map.data('tracks'), map);
 

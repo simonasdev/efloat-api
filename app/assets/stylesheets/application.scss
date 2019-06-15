@@ -71,9 +71,5 @@ input[type="radio"], input[type="checkbox"] {
 }
 
 .leaflet-marker-pane > *, .leaflet-shadow-pane > * {
-  transition: transform .1s linear;
-}
-
-.leaflet-tooltip-pane > *, .leaflet-popup-pane > * {
-  transition: transform 10ms linear;
+  transition: transform .2s linear;
 }
