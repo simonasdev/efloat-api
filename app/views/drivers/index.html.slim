@@ -1,0 +1,38 @@
+.page-header
+  = link_to new_driver_path, class: 'btn btn-primary' do
+    span.glyphicon.glyphicon-plus
+    |  New Driver
+  = import_button 'Import drivers', import_drivers_path, :csv
+  h1
+    | Listing drivers
+
+.row
+  .col-xs-12
+    = search_form_for @q do |f|
+      .row
+        .col-md-4
+          = f.search_field :name_cont, placeholder: 'Name', class: 'form-control'
+        input.hidden type="submit" tabindex="-1"
+
+hr
+.table-responsive
+  table.table.table-striped.table-bordered.table-hover
+    thead
+      tr
+        th Name
+        th Kind
+        th Car
+        th Country
+        th
+    tbody
+      - @drivers.each do |driver|
+        tr
+          td= driver.name
+          td= driver.kind
+          td= driver.car
+          td= driver.country
+          td
+            = link_to 'Show', driver
+            br
+            = link_to 'Edit', edit_driver_path(driver)
+

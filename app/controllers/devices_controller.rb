@@ -2,8 +2,6 @@ class DevicesController < ApplicationController
   before_action :invalidate_cache, only: %i(index)
   before_action :set_device, only: %i[show edit update destroy command watch]
 
-  skip_before_action :authenticate_user!, only: %i(index), if: :json_request?
-
   def index
     @q = Device.ransack(params[:q])
     @devices = @q.result.listing

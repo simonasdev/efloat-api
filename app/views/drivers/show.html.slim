@@ -1,0 +1,30 @@
+.page-header
+  = link_to drivers_path, class: 'btn btn-default' do
+    span.glyphicon.glyphicon-list-alt
+    |  Back
+  = link_to edit_driver_path(@driver), class: 'btn btn-primary' do
+    span.glyphicon.glyphicon-pencil
+    |  Edit
+  h1
+    | Show driver
+/ .row
+/   .col-xs-12
+/     = form_tag watch_race_driver_path(@driver), method: :get do
+/       .row
+/         .col-md-3
+/           = select_tag :race_id, options_for_select(@driver.races.ordered.map { |race| [race.title, race.id] }), class: 'form-control'
+/         .col-md-3
+/           = submit_tag 'Watch timeline', class: 'btn btn-success'
+/ hr
+dl.dl-horizontal
+  dt
+    | Name:
+  dd
+    = @driver.name
+  dt
+    | Kind:
+  dd
+    = @driver.kind
+  dt Crew data:
+  dd
+    pre= JSON.pretty_generate(@driver.data)

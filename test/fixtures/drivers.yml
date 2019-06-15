@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyText
+  kind: 1
+  comment: MyText
+  data: 
+
+two:
+  name: MyText
+  kind: 1
+  comment: MyText
+  data: 

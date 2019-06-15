@@ -27,6 +27,15 @@ Rails.application.routes.draw do
     resources :data_lines, only: :index
   end
 
+  resources :drivers do
+    collection do
+      post :import
+    end
+    member do
+      get :watch, as: :watch_race
+    end
+  end
+
   resources :races do
     member do
       post :import_tracks
