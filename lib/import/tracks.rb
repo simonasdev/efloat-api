@@ -7,6 +7,12 @@ module Import
     include GoogleMaps::Services
 
     GEO_ATTRS = %i[latd latm lats lngd lngm lngs]
+    KINDS = {
+      speed: :speed,
+      passage: :passage,
+      limited: :limited,
+      limit: :limited
+    }.with_indifferent_access
 
     attr_reader :race, :sheet, :directions
 
@@ -57,7 +63,7 @@ module Import
 
         track_data << {
           route: [start_coords, end_coords],
-          kind: values[3],
+          kind: KINDS[values[3]],
           name: values[4],
           speed_limit: values[5],
           waypoints: waypoint_coords,
