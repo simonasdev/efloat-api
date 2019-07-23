@@ -63,7 +63,7 @@ module Import
 
         track_data << {
           route: [start_coords, end_coords],
-          kind: KINDS[values[3]],
+          kind: KINDS[values[3].to_s.strip],
           name: values[4],
           speed_limit: values[5],
           waypoints: waypoint_coords,
