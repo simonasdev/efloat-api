@@ -34,7 +34,19 @@ module Import
             formatted_value = value.to_s.strip.chomp(',').squeeze(', ')
 
             if i == 1
-              formatted_value.gsub(', ', "\n").gsub(' ', ',').split("\n").map(&method(:parse_coords)).join("\n")
+              if formatted_value.include?(';')
+                formatted_value
+                  .gsub(' ; ', "\n")
+                  .gsub('; ', "\n")
+                  .gsub(' ;', "\n")
+                  .gsub(', ', ',')
+                  .gsub(' ', ',')
+                  .split("\n")
+                  .map(&method(:parse_coords))
+                  .join("\n")
+              else
+                formatted_value.gsub(', ', "\n").gsub(' ', ',').split("\n").map(&method(:parse_coords)).join("\n")
+              end
             else
               parse_coords(formatted_value.gsub(', ', ',').gsub(' ', ','))
             end
