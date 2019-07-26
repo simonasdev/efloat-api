@@ -79,7 +79,7 @@ class DevicesController < ApplicationController
   end
 
   def connected
-    render partial: 'connected_devices', locals: { devices: Device.connected }
+    render partial: 'connected_devices', locals: { devices: Device.connected(params[:sort]) }
   end
 
   def import

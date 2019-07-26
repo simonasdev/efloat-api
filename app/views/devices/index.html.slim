@@ -65,4 +65,7 @@ hr
             - unless device.enabled?
               = link_to 'Enable', device_path(device, { device: { state: :enabled } }), method: :patch, class: 'btn btn-success'
 
+.row
+  .col-md-3
+    = select_tag :sort, options_for_select([['Start position', 'position'], ['Index', 'index'], ['Voltage', 'voltage']]), class: 'form-control'
 #connected-devices

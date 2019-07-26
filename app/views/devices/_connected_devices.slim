@@ -4,7 +4,7 @@ pre
 
 hr
 
-- disconnected_devices = Device.enabled.where.not(id: devices).ordered
+- disconnected_devices = Device.enabled.where.not(id: devices.map(&:id)).ordered
 h2 Enabled disconnected devices (#{disconnected_devices.size})
 pre
   = render_disconnected_devices(disconnected_devices)

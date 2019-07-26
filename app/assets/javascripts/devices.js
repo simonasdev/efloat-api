@@ -27,7 +27,7 @@ function initializeTimelineMap() {
 function initializeConnectedDevices () {
   if ($('#connected-devices').length) {
     window.connectedDevicesInterval = window.setInterval(function () {
-      $.get('/devices/connected', function (response) {
+      $.get('/devices/connected?sort=' + $('#sort').val(), function (response) {
         $('#connected-devices').html(response);
       });
     }, 2000);
