@@ -35,7 +35,7 @@ wb.add_worksheet(name: "Ataskaita") do |sheet|
         id: event.device_id,
         race_id: event.race_id,
         from: lines.first.timestamp,
-        till: lines.last.timestamp,
+        till: lines.last.timestamp.advance(minutes: 1),
         host: "http://#{request.host}:#{request.port}"
       ),
       ref: sheet.rows[index + 1].cells.first
