@@ -4,6 +4,7 @@ header_style = { bg_color: "00", fg_color: "FF", alignment: { horizontal: :cente
 
 wb.add_worksheet(name: "Ataskaita") do |sheet|
   sheet.add_row [
+    'Link',
     'Driver',
     'Track, speed limit',
     'Seconds',
@@ -14,10 +15,11 @@ wb.add_worksheet(name: "Ataskaita") do |sheet|
     'Coordinates'
   ], header_style
 
-  @events.each do |event|
+  @events.each_with_index do |event, index|
     lines = event.get_data_lines.ordered.select(:timestamp, :speed, :latitude, :longitude)
 
     sheet.add_row [
+      'Review',
       event.device.name,
       "#{event.track.name}, #{event.track.speed_limit}km/h",
       event.seconds,
@@ -27,5 +29,16 @@ wb.add_worksheet(name: "Ataskaita") do |sheet|
       lines.map(&:speed).join("\n"),
       lines.map { |line| "#{line.latitude},#{line.longitude}" }.join("\n"),
     ]
+
+    sheet.add_hyperlink(
+      location: watch_race_device_url(
+        id: event.device_id,
+        race_id: event.race_id,
+        from: lines.first.timestamp,
+        till: lines.last.timestamp,
+        host: "http://#{request.host}:#{request.port}"
+      ),
+      ref: sheet.rows[index + 1].cells.first
+    )
   end
 end

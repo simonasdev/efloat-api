@@ -11,14 +11,14 @@
           .input-group
             span class="input-group-addon"
               span class="glyphicon glyphicon-calendar"
-            = text_field_tag :timestamp_from, 10.minutes.ago, placeholder: 'Time from', class: 'form-control datetimepicker'
+            = text_field_tag :timestamp_from, params[:from] || 10.minutes.ago, placeholder: 'Time from', class: 'form-control datetimepicker'
     .col-xs-5
       .form-group
         label style='width: 100%'
           .input-group
             span class="input-group-addon"
               span class="glyphicon glyphicon-calendar"
-            = text_field_tag :timestamp_until, Time.current, placeholder: 'Time until', class: 'form-control datetimepicker'
+            = text_field_tag :timestamp_until, params[:till] || Time.current, placeholder: 'Time until', class: 'form-control datetimepicker'
     .col-xs-2
       #refresh-data.btn.btn-success
         span.glyphicon.glyphicon-refresh

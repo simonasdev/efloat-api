@@ -1,6 +1,6 @@
 class Track < ApplicationRecord
   belongs_to :race
-  has_many :points
+  has_many :points, dependent: :delete_all
 
   enum kind: %i[speed passage limited]
 
