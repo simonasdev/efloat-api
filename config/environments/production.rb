@@ -92,5 +92,5 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 
-  config.react_host = 'http://134.209.255.104'
+  config.react_host = 'http://rallygps.live'
 end
