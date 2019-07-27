@@ -61,4 +61,4 @@ dl.dl-horizontal
     - if @race.tracks.any?
       #map data-tracks=(@race.tracks.map { |track| track.slice(:route, :id, :name, :length_in_km, :kind, :speed_limit, :start_time, :end_time) }.to_json)
 
-      = render 'track_tooltips', tracks: @race.tracks, container: '#map'
+      = render 'track_tooltips', tracks: @race.tracks
