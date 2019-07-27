@@ -26,3 +26,5 @@
 
 .map-container
   #timeline-map data-url=(device_data_lines_path(@device, race_id: @race.id)) data-tracks=(@race.tracks.map { |track| track.slice(:route, :id, :name, :length_in_km, :kind, :speed_limit) }.to_json)
+
+= render 'races/track_tooltips', tracks: @race.tracks, container: '#timeline-map'
