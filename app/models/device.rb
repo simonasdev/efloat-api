@@ -50,7 +50,7 @@ class Device < ApplicationRecord
     when :position
       ordered
     when :voltage
-      preload(:current_data_line).to_a.sort_by { |device| device.current_data_line&.battery_voltage.to_i }
+      preload(:current_data_line).to_a.sort_by { |device| device.current_data_line&.battery_voltage.to_f }
     when :index
       order('index::integer ASC')
     end
