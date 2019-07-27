@@ -83,7 +83,7 @@ class DevicesController < ApplicationController
 
     render partial: 'connected_devices', locals: {
       devices: devices,
-      disconnected_devices: Device.enabled.where.not(id: devices.map(&:id)).ordered_by(params[:sort])
+      disconnected_devices: Device.not_disabled.where.not(id: devices.map(&:id)).ordered_by(params[:sort])
     }
   end
 
