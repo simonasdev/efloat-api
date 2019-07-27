@@ -79,7 +79,12 @@ class DevicesController < ApplicationController
   end
 
   def connected
-    render partial: 'connected_devices', locals: { devices: Device.connected(params[:sort]) }
+    devices = Device.connected(params[:sort])
+
+    render partial: 'connected_devices', locals: {
+      devices: devices,
+      disconnected_devices: Device.enabled.where.not(id: devices.map(&:id)).ordered_by(params[:sort])
+    }
   end
 
   def import

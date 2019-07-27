@@ -45,18 +45,20 @@ class Device < ApplicationRecord
     !online
   end
 
+  def self.ordered_by(identifier)
+    case identifier.to_sym
+    when :position
+      ordered
+    when :voltage
+      preload(:current_data_line).to_a.sort_by { |device| device.current_data_line&.battery_voltage.to_i }
+    when :index
+      order('index::integer ASC')
+    end
+  end
+
   def self.connected(sort_by)
     if numbers = $redis.get('devices:connected')
-      collection = where(number: JSON.parse(numbers))
-
-      case sort_by
-      when 'position'
-        collection.ordered
-      when 'voltage'
-        collection.to_a.sort_by { |device| device.current_data_line&.voltage }
-      else
-        collection.order(sort_by)
-      end
+      where(number: JSON.parse(numbers)).ordered_by(sort_by)
     else
       none
     end
