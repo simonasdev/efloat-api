@@ -50,7 +50,15 @@ class Device < ApplicationRecord
     when :position
       ordered
     when :voltage
-      preload(:current_data_line).to_a.sort_by { |device| device.current_data_line&.battery_voltage.to_f }
+      keys = $redis.scan_each(match: 'data_lines:*').to_a
+      device_voltage_map = $redis.mget(keys).map.with_index do |line, index|
+        [
+          keys[index].split(':').last.to_i,
+          line.split(',').second.to_f
+        ]
+      end.to_h
+
+      all.to_a.sort_by { |device| device_voltage_map[device.id] }
     when :index
       order('index::integer ASC')
     end
