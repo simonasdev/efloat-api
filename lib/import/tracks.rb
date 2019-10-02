@@ -95,7 +95,7 @@ module Import
             hash[:distance][:value]
           end
 
-          race.tracks.create attrs
+          race.tracks.create(attrs)
         end
 
         ProcessTracksWorker.perform_async(race.id)
