@@ -54,12 +54,7 @@ function initializeRouteMaps() {
     map.on('click', function(event) {
       var latlng = event.latlng;
 
-      var textArea = document.createElement("textarea");
-      textArea.value = latlng.lat + ',' + latlng.lng;
-      document.body.appendChild(textArea);
-      textArea.focus();
-      textArea.select();
-      document.execCommand('copy');
+      copyToClipboard(latlng.lat + ',' + latlng.lng);
     });
 
     function fitPolyline() {

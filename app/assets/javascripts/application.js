@@ -32,7 +32,22 @@ $(document).on('turbolinks:load', function () {
   initializeConnectedDevices();
 
   $('.datetimepicker').datetimepicker();
-})
+});
+
+function copyToClipboard(value) {
+  var textArea = document.createElement("textarea");
+  textArea.style.opacity = 0;
+  textArea.style.position = 'fixed';
+  textArea.value = value;
+
+  document.body.appendChild(textArea);
+  textArea.focus();
+  textArea.select();
+
+  document.execCommand('copy');
+
+  document.body.removeChild(textArea);
+}
 
 function setActiveModule () {
   var path = window.location.pathname;
