@@ -27,6 +27,7 @@
 $(document).on('turbolinks:load', function () {
   setActiveModule();
   initializeMap();
+  initializeRouteMaps();
   initializeTimelineMap();
   initializeConnectedDevices();
 

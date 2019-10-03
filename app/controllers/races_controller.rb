@@ -93,6 +93,10 @@ class RacesController < ApplicationController
   end
 
   def race_params
-    params.require(:race).permit!
+    params.require(:race).permit!.tap do |_params|
+      (_params[:tracks_attributes] || {}).each do |i, attrs|
+        attrs[:route] = JSON.parse(attrs[:route])
+      end
+    end
   end
 end

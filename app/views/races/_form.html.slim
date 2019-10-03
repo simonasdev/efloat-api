@@ -30,6 +30,17 @@
           span class="input-group-addon"
             span class="glyphicon glyphicon-calendar"
           = f.text_field :end_time, class: "form-control datetimepicker"
+  = f.label :route, class: "col-sm-2 control-label"
+  br
+  br
+  = f.fields_for :tracks, @race.tracks.speed do |ff|
+    .form-group
+      .col-sm-12.col-sm-offset-2
+        = ff.label :route, ff.object.name, class: 'control-label'
+      .col-sm-5.col-sm-offset-2
+        = ff.text_area :route, class: "form-control track-route", rows: 10
+      .col-sm-5
+        .route-map(id="route-#{ff.object.id}" style='height: 214px')
   .form-group
     .col-sm-offset-2.col-sm-10
       = f.submit class: "btn btn-primary"

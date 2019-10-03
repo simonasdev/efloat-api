@@ -26,6 +26,38 @@ function initializeMap() {
   }
 }
 
+function initializeRouteMaps() {
+  var $maps = $('.route-map');
+
+  $maps.each(function(i, element) {
+    var map = L.map(element.id, defaultMapOptions());
+    var $routeInput = $(element).closest('.form-group').find('.track-route');
+    var route = JSON.parse($routeInput.val());
+
+    var polyline = L.polyline(route, {
+      color: getTrackColor('speed')
+    });
+
+    fitPolyline();
+
+    $routeInput.on('change', function() {
+      map.removeLayer(polyline);
+
+      polyline = L.polyline(JSON.parse($routeInput.val()), {
+        color: getTrackColor('speed')
+      });
+
+      fitPolyline();
+    });
+
+    function fitPolyline() {
+      polyline.addTo(map);
+
+      map.fitBounds(polyline.getBounds());
+    }
+  });
+}
+
 function defaultMapOptions() {
   return {
     layers: L.tileLayer('https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png', {
