@@ -37,7 +37,7 @@ function initializeRouteMaps() {
     var $routeInput = $(element).closest('.form-group').find('.track-route');
     var markers = [];
 
-    addMarkersFromRoute();
+    map.fitBounds(L.polyline(addMarkersFromRoute()).getBounds());
 
     $routeInput.on('change', function() {
       markers.forEach(map.removeLayer.bind(map));
@@ -63,7 +63,7 @@ function initializeRouteMaps() {
         marker.addTo(map);
       });
 
-      map.fitBounds(L.polyline(route).getBounds());
+      return route
     }
   });
 }
