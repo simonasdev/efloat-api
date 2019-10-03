@@ -40,7 +40,7 @@ function initializeRouteMaps() {
     addMarkersFromRoute();
 
     $routeInput.on('change', function() {
-      markers.forEach(map.removeLayer);
+      markers.forEach(map.removeLayer.bind(map));
       markers.length = 0;
 
       addMarkersFromRoute();
