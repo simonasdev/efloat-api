@@ -44,11 +44,13 @@ module Import
 
           if values[2]
             lat, lon = values[2].split(',').map(&:strip)
+            number = values[1]
+
             race.markers.create(
               track: Track.speed.find_by(name: values[0]),
               latitude: lat,
               longitude: lon,
-              number: values[1],
+              number: number.is_a?(Float) ? number.to_i : number,
             )
           end
         end
