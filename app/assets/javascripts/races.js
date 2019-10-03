@@ -31,6 +31,7 @@ function initializeRouteMaps() {
 
   $maps.each(function(i, element) {
     var map = L.map(element.id, defaultMapOptions());
+
     var $routeInput = $(element).closest('.form-group').find('.track-route');
     var route = JSON.parse($routeInput.val());
 
@@ -48,6 +49,12 @@ function initializeRouteMaps() {
       });
 
       fitPolyline();
+    });
+
+    map.on('click', function(event) {
+      var latlng = event.latlng;
+
+      navigator.clipboard.writeText(latlng.lat + ',' + latlng.lng);
     });
 
     function fitPolyline() {
