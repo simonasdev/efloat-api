@@ -48,7 +48,7 @@ module Import
               track: Track.speed.find_by(name: values[0]),
               latitude: lat,
               longitude: lon,
-              number: values[1].to_i.to_s,
+              number: values[1],
             )
           end
         end
