@@ -30,25 +30,20 @@ function initializeRouteMaps() {
   var $maps = $('.route-map');
 
   $maps.each(function(i, element) {
-    var map = L.map(element.id, defaultMapOptions());
+    var map = L.map(element.id, $.extend(defaultMapOptions(), {
+      preferCanvas: true
+    }));
 
     var $routeInput = $(element).closest('.form-group').find('.track-route');
-    var route = JSON.parse($routeInput.val());
+    var markers = [];
 
-    var polyline = L.polyline(route, {
-      color: getTrackColor('speed')
-    });
-
-    fitPolyline();
+    addMarkersFromRoute();
 
     $routeInput.on('change', function() {
-      map.removeLayer(polyline);
+      markers.forEach(map.removeLayer);
+      markers.length = 0;
 
-      polyline = L.polyline(JSON.parse($routeInput.val()), {
-        color: getTrackColor('speed')
-      });
-
-      fitPolyline();
+      addMarkersFromRoute();
     });
 
     map.on('click', function(event) {
@@ -57,10 +52,18 @@ function initializeRouteMaps() {
       copyToClipboard(latlng.lat + ',' + latlng.lng);
     });
 
-    function fitPolyline() {
-      polyline.addTo(map);
+    function addMarkersFromRoute() {
+      var route = JSON.parse($routeInput.val());
 
-      map.fitBounds(polyline.getBounds());
+      route.forEach(function (position) {
+        var marker = L.circleMarker(position, { radius: 5 }).bindPopup(position.join(', '));
+
+        markers.push(marker);
+
+        marker.addTo(map);
+      });
+
+      map.fitBounds(L.polyline(route).getBounds());
     }
   });
 }
