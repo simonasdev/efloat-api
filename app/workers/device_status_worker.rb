@@ -1,11 +1,12 @@
 class DeviceStatusWorker
   include Sidekiq::Worker
 
-  def perform identifier, online
+  def perform(identifier, online)
     device = Device.find_by(number: identifier)
 
     if device
-      device.update online: online
+      device.update(online: online)
     end
+  rescue ArgumentError
   end
 end

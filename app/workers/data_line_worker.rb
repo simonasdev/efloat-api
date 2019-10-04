@@ -35,6 +35,7 @@ class DataLineWorker
       line = device.data_lines.create(attrs)
       device.update(current_data_line: line, online: true)
     end
+  rescue ArgumentError
   end
 
   def valid_coordinate? coord
