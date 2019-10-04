@@ -40,7 +40,7 @@ dl.dl-horizontal
   dt Crew data:
   dd
     pre= JSON.pretty_generate(@device.crew_data)
-  dt Current data:
+  dt Current valid data:
   dd
     pre= JSON.pretty_generate(@device.current_data_line&.attributes&.except('id', 'created_at', 'updated_at', 'device_id'))
   dt Commands:

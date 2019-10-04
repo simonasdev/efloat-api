@@ -1,1 +1,5 @@
-$('.device-actions dl').after("<%= j render_flash :notice, @notice %>");
+if ($('.device-actions').length) {
+  $('.device-actions dl').after("<%= j render_flash :notice, @notice %>");
+} else {
+  $('#device-<%= @device.id %>').replaceWith("<%= j render @device %>");
+}

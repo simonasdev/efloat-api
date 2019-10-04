@@ -1,0 +1,15 @@
+tr(id="device-#{device.id}")
+  td= device.number
+  td= device.index
+  td= device.name
+  td= device.position
+  td= device.kind
+  td
+    = link_to 'Show', device
+    br
+    = link_to 'Edit', edit_device_path(device)
+  td
+    - unless device.disabled?
+      = link_to 'Disable', device_path(device, { device: { state: :disabled } }), method: :patch, remote: true, class: 'btn btn-danger'
+    - unless device.enabled?
+      = link_to 'Enable', device_path(device, { device: { state: :enabled } }), method: :patch, remote: true, class: 'btn btn-success'
