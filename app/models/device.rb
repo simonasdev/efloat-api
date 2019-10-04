@@ -54,11 +54,11 @@ class Device < ApplicationRecord
       device_voltage_map = $redis.mget(keys).map.with_index do |line, index|
         [
           keys[index].split(':').last.to_i,
-          line.split(',').second.to_f
+          line.split(',').second
         ]
       end.to_h
 
-      all.to_a.sort_by { |device| device_voltage_map[device.id] }
+      all.to_a.sort_by { |device| device_voltage_map[device.id].to_f }
     when :index
       order('index::integer ASC')
     end
