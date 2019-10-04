@@ -4,7 +4,7 @@ class Track < ApplicationRecord
 
   enum kind: %i[speed passage limited]
 
-  before_save :calculate_length, if: :route_changed?
+  before_save :calculate_length, if: :route_changed?, on: :update
 
   def length_in_km
     "#{ (length / 1000).round(2) }km" if length
