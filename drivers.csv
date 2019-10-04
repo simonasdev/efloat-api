@@ -25,7 +25,7 @@ driver,1,Vaidotas Žala/Andris Malnieks,LT/LV,Skoda Fabia R5
 driver,2,Giedrius Notkus/Dalius Strižanas,LT/LT,Mitsubishi Lancer Evo IX
 driver,3,Vytautas Švedas/Mindaugas Čepulis,LT/LT,VW Polo R5
 driver,4,Jānis Vorobjovs/Ivo Pūķis,LV/LV,Mitsubishi Evo
-driver,5,Martynas Samsonas/Ervinas Snitkas,LT/LT,Ford Fiesta N5+
+driver,5,Martynas Samsonas/Ervinas Snitkas,LT/LT,Ford Fiesta N5+,93
 driver,6,Gediminas Maškauskas/Stasys Tarailė,LT/LT,Mitsubishi Lancer Evo IX
 driver,7,Eugenijus Sladkevičius/Gediminas Saudargas,LT/LT,Mitsubishi Mirage
 driver,8,Siarhei Viazovich/Dzmitry Akhremchyk,BY/BY,Mitsubishi Lancer Evo X
@@ -54,9 +54,9 @@ driver,30,Mindaugas Vijeikis/Mantas Kutka,LT/LT,Toyota Land Cruiser
 driver,31,Vaidotas Paškevičius/Agnė Vičkačkaitė,LT/LT,Seat Leon
 driver,32,Merkys Saukevičius/Darius Leskauskas,LT/LT,Toyota Tacoma
 driver,33,Justinas Putys/Valdemaras Milaševskis,LT/LT,Mitsubishi Pajero Evoliution
-driver,01,Paulius Novakas/Mykolas Stravinskas,LT/LT,Subaru Impreza
+driver,01,Paulius Novakas/Mykolas Stravinskas,LT/LT,Subaru Impreza,91
 driver,02,Ovidijus Knyšius/Nerijus Kliokys,LT/LT,BMW E36
-driver,03,Michal Matusak/Marek Poniewierka,PL/PL,Subaru Impreza WRX
+driver,03,Michal Matusak/Marek Poniewierka,PL/PL,Subaru Impreza WRX,96
 driver,04,Adomas Kepalas/Ieva Kepalienė,LT/LT,Opel Astra GsI
 driver,05,Saimonas Daudžvardis/Linas Brekys,LT/LT,Opel Kadett
 driver,06,Marius Obeliūnas/Marcelinas Sorkinas,LT/LT,VAZ 2101
