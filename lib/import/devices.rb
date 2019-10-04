@@ -17,8 +17,8 @@ module Import
             name: arr[2],
             position: arr[1],
             crew_data: {
-              car: arr[3],
-              country: arr[4]
+              car: arr[4],
+              country: arr[3]
             }
           )
         end
