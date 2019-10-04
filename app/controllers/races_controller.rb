@@ -76,6 +76,7 @@ class RacesController < ApplicationController
                      .with_lines_by_range(Time.zone.parse(timestamp_from), Time.zone.parse(timestamp_until))
                      .where('average_speed >= ? AND seconds >= ?', speed, time)
                      .preload(:device, :track)
+                     .ordered
     else
       flash[:error] = 'Fill all inputs'
       redirect_back(fallback_location: race_path(@race))

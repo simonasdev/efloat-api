@@ -4,6 +4,7 @@ class SpeedExceedEvent < ApplicationRecord
   belongs_to :device
 
   scope :joined_lines, -> { joins('INNER JOIN speed_exceed_data_lines lines ON lines.id = ANY(speed_exceed_events.data_line_ids)') }
+  scope :ordered, -> { order(:track_id) }
 
   def self.with_lines_by_range(from, till)
     joined_lines.group(:id)
