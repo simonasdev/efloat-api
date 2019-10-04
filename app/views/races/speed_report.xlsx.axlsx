@@ -3,7 +3,7 @@ wb = xlsx_package.workbook
 header_style = { bg_color: "00", fg_color: "FF", alignment: { horizontal: :center }, bold: true }
 
 wb.add_worksheet(name: "Ataskaita") do |sheet|
-  sheet.add_row [
+  header = [
     'Link',
     'Driver',
     'Track, speed limit',
@@ -13,11 +13,13 @@ wb.add_worksheet(name: "Ataskaita") do |sheet|
     'Timestamps',
     'Speeds',
     'Coordinates'
-  ], header_style
+  ]
+  sheet.add_row header, header_style
 
   @events.each_with_index do |event, index|
     lines = event.get_data_lines.ordered.select(:timestamp, :speed, :latitude, :longitude)
-    header = [
+
+    sheet.add_row [
       'Review',
       event.device.name,
       "#{event.track.name}, #{event.track.speed_limit}km/h",
@@ -28,8 +30,6 @@ wb.add_worksheet(name: "Ataskaita") do |sheet|
       lines.map(&:speed).join("\n"),
       lines.map { |line| "#{line.latitude},#{line.longitude}" }.join("\n"),
     ]
-
-    sheet.add_row header, widths: [:auto] * header.size
 
     sheet.add_hyperlink(
       location: watch_race_device_url(
@@ -42,4 +42,6 @@ wb.add_worksheet(name: "Ataskaita") do |sheet|
       ref: sheet.rows[index + 1].cells.first
     )
   end
+
+  ws.column_widths [:auto] * header.size
 end
