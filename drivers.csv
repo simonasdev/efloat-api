@@ -15,9 +15,9 @@ driver,54,Julius Mališevičius/Laimonas Mališevičius,LT/LT,Opel Astra
 driver,55,Alfonsas Žiukas/Marius Žiukas,LT/LT,VW Golf
 driver,56,Sigitas Griškevičius/Arvydas Babrauskas,LT/LT,Subaru Impreza StI
 driver,57,Kristaps Lacis/Roberts Lokis,LV/LV,VW Golf
-driver,58,Remigijus Orvydas/,Domantas,LT/LT Mozūraitis,Subaru Impreza
+driver,58,Remigijus Orvydas/Domantas Mozūraitis,LT/LT,Subaru Impreza
 driver,59,Kęstutis Balčiūnas/Ernesta Globytė,LT/LT,BMW 318
-driver,60,Vytautas Kaziukonis/Algirdas Pranckūnas,LT/LT,BMW 323Ti
+driver,60,Vytautas Kaziukonis/Algirdas Pranckūnas,LT/LT,BMW 323Ti,90
 driver,61,Vytautas Puodžiūnas/Voicech Orševski,LT/LT,BMW 323
 driver,62,Paulius Kiudys/Aivaras Mirauskas,LT/LT,Honda Civic
 driver,63,Saulius Zurlys/Ilona Steponėnė,LT/LT,BMW 328
@@ -54,6 +54,7 @@ driver,30,Mindaugas Vijeikis/Mantas Kutka,LT/LT,Toyota Land Cruiser
 driver,31,Vaidotas Paškevičius/Agnė Vičkačkaitė,LT/LT,Seat Leon
 driver,32,Merkys Saukevičius/Darius Leskauskas,LT/LT,Toyota Tacoma
 driver,33,Justinas Putys/Valdemaras Milaševskis,LT/LT,Mitsubishi Pajero Evoliution
+driver,34,Georgy Troshkin/-,RU/-,-,94
 driver,01,Paulius Novakas/Mykolas Stravinskas,LT/LT,Subaru Impreza,91
 driver,02,Ovidijus Knyšius/Nerijus Kliokys,LT/LT,BMW E36
 driver,03,Michal Matusak/Marek Poniewierka,PL/PL,Subaru Impreza WRX,96
