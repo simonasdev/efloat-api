@@ -21,6 +21,10 @@ function initializeTimelineMap() {
     addTracksToMap($map.data('tracks'), map);
 
     $('#refresh-data').on('click', replaceDataLinesForMap.bind(null, $map.data('url'), map));
+
+    if ($('#timestamp_from').val() && $('#timestamp_until').val()) {
+      $('#refresh-data').click();
+    }
   }
 }
 
