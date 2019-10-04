@@ -4,7 +4,7 @@ function initializeTimelineMap() {
   if ($map.length) {
     var map = L.map(
       $map.attr('id'),
-      _.assign({}, defaultMapOptions(), {
+      _.assign(defaultMapOptions(), {
         timeDimension: true
       })
     );

@@ -30,7 +30,7 @@ function initializeRouteMaps() {
   var $maps = $('.route-map');
 
   $maps.each(function(i, element) {
-    var map = L.map(element.id, $.extend(defaultMapOptions(), {
+    var map = L.map(element.id, _.assign(defaultMapOptions(), {
       preferCanvas: true
     }));
 
@@ -78,7 +78,7 @@ function defaultMapOptions() {
       [56.979041, 19.577637],
       [52.933327, 28.586426]
     ],
-    zoomSnap: 0.5,
+    zoomSnap: 0.5
   };
 }
 

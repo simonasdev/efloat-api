@@ -10,7 +10,15 @@ class Race < ApplicationRecord
   scope :speed_exceed_unprocessed, -> { where(speed_exceed_processed: false) }
   scope :ordered, -> { order(start_time: :desc) }
 
+  after_commit :notify_changes, on: :update, if: :saved_change_to_public?
+
   def devices
     Device.not_disabled
+  end
+
+  private
+
+  def notify_changes
+    $redis.publish(Device::CHANNEL, RaceSerializer.new(self).to_json)
   end
 end
