@@ -43,5 +43,5 @@ wb.add_worksheet(name: "Ataskaita") do |sheet|
     )
   end
 
-  ws.column_widths [:auto] * header.size
+  sheet.column_widths [:auto] * header.size
 end
