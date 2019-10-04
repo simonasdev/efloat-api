@@ -13,9 +13,9 @@ class PolylineLength
     sum = 0.0
 
     @polyline.each_with_index do |position, index|
-      next unless previous_position = @polyline[index - 1]
+      next if index.zero?
 
-      sum += Geo::Coord.new(*previous_position).distance(Geo::Coord.new(*position))
+      sum += Geo::Coord.new(*@polyline[index - 1]).distance(Geo::Coord.new(*position))
     end
 
     sum
