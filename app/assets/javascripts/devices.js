@@ -80,7 +80,7 @@ function initializeTimelineMap() {
               timeDimension && timeDimension._map.timeDimension._currentTimeIndex || 0
             ];
 
-            if (speed) {
+            if (typeof speed !== 'undefined') {
               layer.unbindTooltip().bindTooltip(Math.round(speed) + ' km/h', { permanent: true });
             }
           }
